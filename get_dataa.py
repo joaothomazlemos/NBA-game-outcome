@@ -4,7 +4,7 @@ from playwright.sync_api import sync_playwright, TimeoutError as playwrightTimeo
 import time
 
 #SEASONS = list(range(2016, 2023))
-SEASONS = [2021, 2022]
+SEASONS = [2022]
 
 
 DATA_DIR = 'data2'
@@ -18,7 +18,7 @@ def get_html(url, selector, sleep=7, retries=3): # async allow the code after it
 
         try:
             with sync_playwright() as p: # istance of playwright object
-                browser = p.chromium.launch() # await will actually wait for the async load of the website complete to lauch the browser
+                browser = p.firefox.launch() # await will actually wait for the async load of the website complete to lauch the browser
                 #context = browser.new_context()
                 page = browser.new_page() # page will be a new tab
                 page.goto(url)
@@ -49,7 +49,7 @@ def scrapy_season(season):
     soup = BeautifulSoup(html, 'html.parser')
     links = soup.find_all('a')
     href = [l['href'] for l in links] # l is a hyperlink for a month
-    stadings_pages = ["https://www.basketball-reference.com{l}" for l in href]
+    stadings_pages = [f"https://www.basketball-reference.com{l}" for l in href]
 
     for url in stadings_pages: # navigate for each month page to save the file name first
         save_path = os.path.join(STANDINGS_DIR, url.split('/')[-1]) # saving in directory the name of the schedule month
