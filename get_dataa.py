@@ -50,7 +50,7 @@ def scrapy_season(season):
     links = soup.find_all('a')
     href = [l['href'] for l in links] # l is a hyperlink for a month
     stadings_pages = [f"https://www.basketball-reference.com{l}" for l in href]
-
+#ok
     for url in stadings_pages: # navigate for each month page to save the file name first
         save_path = os.path.join(STANDINGS_DIR, url.split('/')[-1]) # saving in directory the name of the schedule month
         if os.path.exists(save_path):
