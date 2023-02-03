@@ -7,7 +7,7 @@ import time
 SEASONS = [2022]
 
 
-DATA_DIR = 'data2'
+DATA_DIR = 'data'
 STANDINGS_DIR = os.path.join(DATA_DIR, 'standings') # data2 is a directory where standings will be located inside
 SCORES_DIR = os.path.join(DATA_DIR, 'scores')
 
