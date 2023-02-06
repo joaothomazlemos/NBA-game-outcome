@@ -11,7 +11,14 @@ The objective of this process is to store a dataframe where the columns would co
 
 
 
-WORK IN  PROGRESS
+
+
+
+
+
+
+
+THIS IS A WORK IN  PROGRESS
 
 This work propose a model to predict NBA games outcomes in form of WIN or LOSS
 
