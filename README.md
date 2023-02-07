@@ -13,3 +13,6 @@ Also, I thought that it would be nice to challenge myself into learning somethin
 
 This work propose a model to predict NBA games outcomes in form of WIN or LOSS, starting since the webscraping step to get data,
 until model deploy with predictions. Im planning to split each step into a separated folder.
+
+Links for medium article about each step:
+1 - Web Scraping: https://medium.com/@joaothomazlemos/nba-web-scraping-with-python-22c76cfd1d4f
