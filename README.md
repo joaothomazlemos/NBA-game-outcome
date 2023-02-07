@@ -1,7 +1,4 @@
 # NBA-game-outcome
-This work propose a model to predict NBA games outcomes in form of WIN or LOSS
-
-# NBA-game-outcome
 
 ## Motivation
 
@@ -12,6 +9,7 @@ Also, I thought that it would be nice to challenge myself into learning somethin
 
 
 
-THIS IS A WORK IN  PROGRESS
+### THIS IS A WORK IN  PROGRESS
 
-This work propose a model to predict NBA games outcomes in form of WIN or LOSS, starting since the webscraping step to get data, until model deploy with predictions.
+This work propose a model to predict NBA games outcomes in form of WIN or LOSS, starting since the webscraping step to get data,
+until model deploy with predictions. Im planning to split each step into a separated folder.
