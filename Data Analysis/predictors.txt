@@ -1,0 +1,1 @@
+['fga', 'pts', 'ts%', 'ortg', 'drtg', 'pf_max', 'pts_max', 'Total', 'opponent_fg', 'opponent_3pa', 'opponent_pts', 'opponent_ts%', 'opponent_orb%', 'opponent_tov%', 'opponent_ortg', 'opponent_drtg', 'opponent_3p_max', 'opponent_ft_max', 'opponent_stl_max', 'opponent_pf_max', 'opponent_3par_max', 'opponent_tov%_max', 'opponent_usg%_max', 'opponent_ortg_max', 'opponent_Total']
