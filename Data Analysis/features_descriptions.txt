@@ -82,7 +82,7 @@ Features description
 
     PTS -- Points
 
-    +/- -- Plus/Minus
+    +/- -- Plus/Minus (player impact)
 
 
     ### Advanced Box Score Stats
