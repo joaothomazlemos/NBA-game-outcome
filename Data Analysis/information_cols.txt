@@ -1,0 +1,5 @@
+info_cols = ['date',
+ 'home_team',
+ 'away_team',
+ 'season',
+ 'home_win' ]
