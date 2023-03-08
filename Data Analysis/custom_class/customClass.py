@@ -30,7 +30,7 @@ class ModelParams:
             'RandomForestClassifier': {'randomforestclassifier__bootstrap': [True, False],
                                         'randomforestclassifier__n_estimators': [100, 200, 300, 400, 500, 1000, 1500],
                                           'randomforestclassifier__criterion':['gini', 'entropy'],
-                                         'randomforestclassifier__max_depth': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                                         'randomforestclassifier__max_depth': [10, 20, 30, 40, 50, 60, 70],
                                            'randomforestclassifier__min_samples_split': [2, 5, 10],
                                              'randomforestclassifier__min_samples_leaf': [1, 2, 4],
                                          'randomforestclassifier__max_features': ['sqrt', None],
@@ -45,10 +45,10 @@ class ModelParams:
                                                     'gradientboostingclassifier__min_samples_split': [2, 5, 10],
                                                       'gradientboostingclassifier__min_samples_leaf': [1, 2, 4],
                                                         'gradientboostingclassifier__min_weight_fraction_leaf': [0.0, 0.25, 0.5],
-                                                          'gradientboostingclassifier__max_depth': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                                                          'gradientboostingclassifier__max_depth': [10, 20, 30, 40, 50, 60, 70],
                                                             'gradientboostingclassifier__min_impurity_decrease': [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 1.0],
                                                               'gradientboostingclassifier__max_features': ['sqrt', None],
-                                                                'gradientboostingclassifier__max_leaf_nodes': [None, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+                                                                'gradientboostingclassifier__max_leaf_nodes': [None, 10, 20, 30, 40]}
         }
                                                
 
