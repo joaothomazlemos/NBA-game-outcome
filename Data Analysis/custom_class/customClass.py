@@ -1,94 +1,103 @@
 
+# Can i talk with chatGPT from here?
 
 class ModelParams:
-        #importing the necessary libraries
-        from sklearn.preprocessing import StandardScaler, MinMaxScaler
+        
+         
         
         """ Info:
-         This class initializes the parameters and scalers for the models, which will be used for gridsearchcv,
-         and their scaling methods.
-          Input:
-           model: the model to be used
-            scaler: Default = False, if True, the model will be scaled accordily with its respective scaler
-          Output:
-           get_pipe: returns the model pipeline and its parameters
-           model_name: returns the model name
-             """
-                
-        #models_list = [LogisticRegression(random_state=42), LinearSVC(random_state=42), RandomForestClassifier(random_state=42), GradientBoostingClassifier(random_state=42)]     
-    
-        #creating the models  parameters dictionary
-        # Parameters of pipelines can be set using '__' separated parameter names:
-        
-        models_params = {
-            'LogisticRegression': {'logisticregression__penalty': ['l1', 'l2', 'elasticnet'],
-                                      'logisticregression__C': [0.001, 0.01, 0.1, 1, 10, 100],
-                                        'logisticregression__solver': ['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'],
-                                          'logisticregression__max_iter': [10000]},
-            'LinearSVC': {'linearsvc__C': [0.0001, 0.001, 0.01, 0.1, 1, 10], 'linearsvc__loss': ['hinge', 'squared_hinge'],
-                             'linearsvc__max_iter': [100000]},
-            'RandomForestClassifier': {'randomforestclassifier__bootstrap': [True, False],
-                                        'randomforestclassifier__n_estimators': [100, 200, 300, 400, 500, 1000, 1500],
-                                          'randomforestclassifier__criterion':['gini', 'entropy'],
-                                         'randomforestclassifier__max_depth': [10, 20, 30, 40, 50, 60, 70],
-                                           'randomforestclassifier__min_samples_split': [2, 5, 10],
-                                             'randomforestclassifier__min_samples_leaf': [1, 2, 4],
-                                         'randomforestclassifier__max_features': ['sqrt', None],
-                                           'randomforestclassifier__min_weight_fraction_leaf': [0.0, 0.25, 0.5],
-                                         'randomforestclassifier__max_leaf_nodes': [10, 20, 30, 40],
-                                           'randomforestclassifier__min_impurity_decrease': [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 1.0]},
-            'GradientBoostingClassifier': {'gradientboostingclassifier__loss': ['deviance', 'exponential'],
-                                             'gradientboostingclassifier__learning_rate': [0.001, 0.01, 0.1, 1, 10],
-                                             'gradientboostingclassifier__subsample': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
-                                               'gradientboostingclassifier__n_estimators': [100, 200, 300, 400, 500, 1000, 1500],
-                                                  'gradientboostingclassifier__criterion': ['friedman_mse', 'squared_error'],
-                                                    'gradientboostingclassifier__min_samples_split': [2, 5, 10],
-                                                      'gradientboostingclassifier__min_samples_leaf': [1, 2, 4],
-                                                        'gradientboostingclassifier__min_weight_fraction_leaf': [0.0, 0.25, 0.5],
-                                                          'gradientboostingclassifier__max_depth': [10, 20, 30, 40, 50, 60, 70],
-                                                            'gradientboostingclassifier__min_impurity_decrease': [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 1.0],
-                                                              'gradientboostingclassifier__max_features': ['sqrt', None],
-                                                                'gradientboostingclassifier__max_leaf_nodes': [None, 10, 20, 30, 40]}
-        }
-                                               
+        This class initializes the parameters and scalers for the models, which will be used for gridsearchcv,
+        and their scaling methods.
+        Input:
+          model: the model to be used
+          n_features: number of features of the dataset so that some hyperparameters grid can be set, mostly for emsembled.
+          Like, for example, the max depth of the tree, which will be set a number between 2 and the square root of the number of features.
+          Or max_leaf_nodes, which will be set to the number between  the square of features and the number of features.
 
-        #creating the models respective scalers:
+          scaler: Default = False, if True, the model will be scaled accordily with its respective scaler
+        Output:
+          get_pipe: returns the model pipeline and its parameters
+          model_name: returns the model name
+            """
+      
+      
+      #creating the models respective pipelines and its parameters
+        def __init__(self, model, n_features, scaler=False):
+              import numpy as np
+              """ Info:
+                This method initializes the model and the scaling method
+                ---------------------------------------------------------------------------------------------
+
+                  Input:
+                  model: the model to be used
+                    Scaler: boolean
+                    -------------------------------------------------------------------------------------------
+                    
+                      Output:
+                      None """
+              self.n_features = n_features
+              self.model = model
+              self.scaler = scaler
+              self.model_name = model.__class__.__name__
+                            
+              #models_list = [LogisticRegression(random_state=42), LinearSVC(random_state=42), RandomForestClassifier(random_state=42), GradientBoostingClassifier(random_state=42)]     
+          
+              #creating the models  parameters dictionary
+              # Parameters of pipelines can be set using '__' separated parameter names:
+              self.models_params = {
+              'LogisticRegression': {'logisticregression__penalty': ['l1', 'l2', 'elasticnet'],
+                                        'logisticregression__C': [0.001, 0.01, 0.1, 1, 10, 100],
+                                          'logisticregression__solver': ['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'],
+                                            'logisticregression__max_iter': [10000]},
+              'LinearSVC': {'linearsvc__C': [0.0001, 0.001, 0.01, 0.1, 1, 10], 'linearsvc__loss': ['hinge', 'squared_hinge'],
+                                'linearsvc__max_iter': [100000]},
+              'RandomForestClassifier': {   'randomforestclassifier__n_estimators': [100, 200, 300, 400, 500, 1000, 1500],
+                                            'randomforestclassifier__criterion':['gini', 'entropy'],
+                                            'randomforestclassifier__max_depth': list(np.arange(start = 2, stop=self.n_features**(1/2), step=1, dtype=int)),
+                                              'randomforestclassifier__min_samples_split': [2, 5, 10],
+                                                'randomforestclassifier__min_samples_leaf': [1, 2, 4],
+                                            'randomforestclassifier__max_features': ['sqrt', None],
+                                              'randomforestclassifier__min_weight_fraction_leaf': [0.0, 0.25, 0.5],
+                                            'randomforestclassifier__max_leaf_nodes': list(np.arange(start=self.n_features**(1/2), stop = self.n_features, step=3, dtype=int)),
+                                              'randomforestclassifier__min_impurity_decrease': [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 1.0]},
+              'GradientBoostingClassifier': {'gradientboostingclassifier__loss': ['deviance', 'exponential'],
+                                                'gradientboostingclassifier__learning_rate': [0.001, 0.01, 0.1, 1, 10],
+                                                'gradientboostingclassifier__subsample': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+                                                  'gradientboostingclassifier__n_estimators': [100, 200, 300, 400, 500, 1000, 1500],
+                                                    'gradientboostingclassifier__criterion': ['friedman_mse', 'squared_error'],
+                                                      'gradientboostingclassifier__min_samples_split': [2, 5, 10],
+                                                        'gradientboostingclassifier__min_samples_leaf': [1, 2, 4],
+                                                          'gradientboostingclassifier__min_weight_fraction_leaf': [0.0, 0.25, 0.5],
+                                                            'gradientboostingclassifier__max_depth': [10, 20, 30, 40, 50, 60, 70],
+                                                              'gradientboostingclassifier__min_impurity_decrease': [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 1.0],
+                                                                'gradientboostingclassifier__max_features': ['sqrt', None],
+                                                                  'gradientboostingclassifier__max_leaf_nodes': [None, 10, 20, 30, 40]}
+          }
+        #importing the necessary libraries
+        from sklearn.preprocessing import StandardScaler, MinMaxScaler
+    
+
+      #creating the models respective scalers:
         models_scalers = {
                 'LogisticRegression': StandardScaler(),
                 'LinearSVC': StandardScaler(),
                 'RandomForestClassifier': MinMaxScaler(),
                 'GradientBoostingClassifier': MinMaxScaler()
         }
-        
-        #creating the models respective pipelines and its parameters
-        def __init__(self, model, scaler=False):
-                """ Info:
-                 This method initializes the model and the scaling method
-                  ---------------------------------------------------------------------------------------------
-
-                   Input:
-                    model: the model to be used
-                     Scaler: boolean
-                      -------------------------------------------------------------------------------------------
-                      
-                       Output:
-                        None """
-                
-                self.model = model
-                self.scaler = scaler
-                self.model_name = model.__class__.__name__
+      
+      
 
         def get_pipe(self):
                 from sklearn.pipeline import make_pipeline
                 """ Info:
-                 This method returns the model pipeline and its parameters and the model name
+                  This method returns the model pipeline and its parameters and the model name
                   ---------------------------------------------------------------------------------------------
 
-                   Input:
+                    Input:
                     None
                     ---------------------------------------------------------------------------------------------
 
-                     Output:
+                      Output:
                       model pipeline, model parameters, model name """
                 
                 self.params = self.models_params[self.model_name]
