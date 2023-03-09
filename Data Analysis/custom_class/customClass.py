@@ -22,7 +22,7 @@ class ModelParams:
       
       
       #creating the models respective pipelines and its parameters
-        def __init__(self, model, n_features, scaler=False):
+        def __init__(self, model, n_features=None, scaler=False):
               import numpy as np
               """ Info:
                 This method initializes the model and the scaling method
@@ -35,7 +35,7 @@ class ModelParams:
                     
                       Output:
                       None """
-              self.n_features = n_features
+              
               self.model = model
               self.scaler = scaler
               self.model_name = model.__class__.__name__
@@ -51,14 +51,14 @@ class ModelParams:
                                             'logisticregression__max_iter': [10000]},
               'LinearSVC': {'linearsvc__C': [0.0001, 0.001, 0.01, 0.1, 1, 10], 'linearsvc__loss': ['hinge', 'squared_hinge'],
                                 'linearsvc__max_iter': [100000]},
-              'RandomForestClassifier': {   'randomforestclassifier__n_estimators': [100, 200, 300, 400, 500, 1000, 1500],
+              'RandomForestClassifier': {   'randomforestclassifier__n_estimators': [50, 100, 200, 300, 400, 500, 1000, 1500],
                                             'randomforestclassifier__criterion':['gini', 'entropy'],
-                                            'randomforestclassifier__max_depth': list(np.arange(start = 2, stop=self.n_features**(1/2), step=1, dtype=int)),
+                                            'randomforestclassifier__max_depth': list(np.arange(start = 2, stop=((n_features)**(1/2)), step=1, dtype=int)) if n_features else None,
                                               'randomforestclassifier__min_samples_split': [2, 5, 10],
                                                 'randomforestclassifier__min_samples_leaf': [1, 2, 4],
                                             'randomforestclassifier__max_features': ['sqrt', None],
                                               'randomforestclassifier__min_weight_fraction_leaf': [0.0, 0.25, 0.5],
-                                            'randomforestclassifier__max_leaf_nodes': list(np.arange(start=self.n_features**(1/2), stop = self.n_features, step=3, dtype=int)),
+                                            'randomforestclassifier__max_leaf_nodes': list(np.arange(start=n_features**(1/2), stop = n_features, step=3, dtype=int)) if n_features else None,
                                               'randomforestclassifier__min_impurity_decrease': [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 1.0]},
               'GradientBoostingClassifier': {'gradientboostingclassifier__loss': ['deviance', 'exponential'],
                                                 'gradientboostingclassifier__learning_rate': [0.001, 0.01, 0.1, 1, 10],
@@ -68,10 +68,10 @@ class ModelParams:
                                                       'gradientboostingclassifier__min_samples_split': [2, 5, 10],
                                                         'gradientboostingclassifier__min_samples_leaf': [1, 2, 4],
                                                           'gradientboostingclassifier__min_weight_fraction_leaf': [0.0, 0.25, 0.5],
-                                                            'gradientboostingclassifier__max_depth': [10, 20, 30, 40, 50, 60, 70],
+                                                            'gradientboostingclassifier__max_depth': list(np.arange(start = 2, stop=n_features**(1/2), step=1, dtype=int)) if n_features else None,
                                                               'gradientboostingclassifier__min_impurity_decrease': [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 1.0],
                                                                 'gradientboostingclassifier__max_features': ['sqrt', None],
-                                                                  'gradientboostingclassifier__max_leaf_nodes': [None, 10, 20, 30, 40]}
+                                                                  'gradientboostingclassifier__max_leaf_nodes': list(np.arange(start=n_features**(1/2), stop = n_features, step=3, dtype=int)) if n_features else None}
           }
         #importing the necessary libraries
         from sklearn.preprocessing import StandardScaler, MinMaxScaler
