@@ -1,0 +1,2 @@
+This folder contains the best parameters for each model ( the files are these optmized models) with
+the dataset on the subset of 100  and 50 best feaures
