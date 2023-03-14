@@ -267,7 +267,7 @@ class ModelDevelopment:
     # function to plot the confusion matrix
     def plot_confusion_matrix(self):
         #importing necessary libraries
-        from sklearn.metrics import confusion_matrix
+        from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
         import seaborn as sns
         import matplotlib.pyplot as plt
         """ Plots the confusion matrix of the best model parameters found by the grid search against the test set
@@ -275,7 +275,8 @@ class ModelDevelopment:
           """
         y_pred = self.best_model.predict(self.X_test) #type: ignore
         cm = confusion_matrix(self.y_test, y_pred)
-        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+        disp.plot()
         plt.title('Confusion Matrix')
         plt.xlabel('Predicted')
         plt.ylabel('Actual')
