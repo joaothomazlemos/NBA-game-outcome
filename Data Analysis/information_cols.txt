@@ -3,3 +3,5 @@ info_cols = ['date',
  'away_team',
  'season',
  'home_win' ]
+
+ y = 'home_win'
