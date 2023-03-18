@@ -1,3 +1,35 @@
-<h1>
-    Hello Word!
-</h1>
+
+    <!-- This will be the home page of the site that have the functionaly to predict the NBA games, 
+    and also have the functionaly to show the results of the games that have been predicted.
+    The home page will have a button that will redirect the user to the prediction page, and that page will 
+    have places so the user can give the teams that will play. After clinking the button to predict, the user will have
+    the results of the game.
+    -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Welcome to NBA predictions!</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="login">
+            <h1>Insert the teams that will play</h1>
+            <form action="{{ url_for('predict')}}" method="post">
+                <input type="text" name="home_team" placeholder="Home Team" required="required" />
+                <input type="text" name="away_team" placeholder="Away Team" required="required" />
+                <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+            </form>
+        </div>
+        {{prediction_text}}
+
+            
+            
+            <div class="footer">
+                <p>Footer</p>
+            </div>
+        </div>
+    </body>
+</html>
+

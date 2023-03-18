@@ -30,7 +30,7 @@ info_cols = ['date', 'Team', 'opponent_Team', 'season', 'home', 'WIN']
 # define the home page of the web app
 @app.route('/')
 def home():
-    return 'Welcome to NBA Predictor!'
+    return render_template('home.html')
 
 # define the predict API endpoint
 @app.route('/predict', methods=['POST'])
@@ -41,7 +41,7 @@ def predict():
        :param away_team: the name of the away team
         :return: the predicted winner of the game
          ---------------------------------------
-          Example request:
+          Example request with postman:
               curl -X POST -H "Content-Type: application/json" -d '{"home_team": "BOS", "away_team": "LAL"}' http://
               Example response:
                     {"prediction": "BOS"}
@@ -61,8 +61,13 @@ def predict():
             10. We select the best 50 features from the feature vector, using the best_features variable. This will be the input of the model.
             11. We make the prediction using the logistic regression model
              """
-    # get the team names from the request
-    request_data = request.get_json()
+    
+    #request_data = request.get_json() # if the request is in json format to pass in POSTMAN for example
+    # get the team names from the request to a list with the teams names
+    request_data = [str(x) for x in request.form.values()]
+    #passing the name sin the list to a dictionary, with keyvalues 'home_team' and 'away_team'
+    request_data = {'home_team': request_data[0], 'away_team': request_data[1]}
+    
     # raising an error if the team names are not in the 3 letters format, using assert, returning a message to the user on the webpage:
     assert (len(request_data['home_team']) == 3) and (len(request_data['away_team']) == 3), 'Team name should have 3 letters format'
     # raising an error if the team names are not all in caps, using asssert
@@ -108,8 +113,12 @@ def predict():
     else:
         winner = away_team
 
+    # return the prediction with render_template
+    return render_template('home.html', prediction_text='The predicted winner is {} with certainty of {:.1%}'.format(winner, prob))
+
    # return the prediction as a JSON object
     return jsonify(f'The predicted winner is {winner} with certainty of {prob: .1%}')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
