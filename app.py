@@ -39,12 +39,7 @@ def predict():
      This function takes the home and away team names as input and returns the predicted winner
       :param home_team: the name of the home team
        :param away_team: the name of the away team
-        :return: the predicted winner of the game
-         ---------------------------------------
-          Example request with postman:
-              curl -X POST -H "Content-Type: application/json" -d '{"home_team": "BOS", "away_team": "LAL"}' http://
-              Example response:
-                    {"prediction": "BOS"}
+        :return: the predicted winner of the game                  
          ---------------------------------------
          Information about what is happening in the function:
             1. We get the team names from the request
