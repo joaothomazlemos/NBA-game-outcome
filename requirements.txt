@@ -1,8 +1,7 @@
-Flask
+flask
 sklearn
+scikit-learn
 pandas
 numpy
-pickle
-matplotlib
-seaborne
 gunicorn
+django
