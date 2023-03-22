@@ -11,23 +11,219 @@
     <head>
         <meta charset="utf-8">
         <title>Welcome to NBA predictions!</title>
-        <link rel="stylesheet" href="css/style.css">
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f1f1f1;
+            }
+            h1 {
+                text-align: center;
+                color: #1e90ff;
+                margin-top: 50px;
+            }
+            ul {
+                list-style-type: none;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+                margin: 50px auto;
+            }
+            li {
+                background-color: #fff;
+                color: #1e90ff;
+                font-weight: bold;
+                padding: 10px 20px;
+                border-radius: 5px;
+                box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+            img {
+                display: block;
+                margin: 30px auto;
+                max-width: 40%;
+            }
+            .prediction {
+            margin: 50px auto;
+            max-width: 500px;
+            text-align: center;
+            }
+
+            .prediction h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            }
+
+            .form-group {
+            margin-bottom: 20px;
+            }
+
+            label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: left;
+            }
+
+            .form-control {
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 18px;
+            padding: 12px 20px;
+            width: 100%;
+            }
+
+            .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+            font-size: 18px;
+            padding: 12px 20px;
+            text-transform: uppercase;
+            }
+
+            .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+            }
+
+            .prediction-text {
+            font-size: 20px;
+            margin-top: 20px;
+            }
+            
+            
+            .footer {
+                background-color: #1e90ff;
+                color: #fff;
+                text-align: center;
+                padding: 20px;
+                margin-top: 50px;
+            }
+        </style>
     </head>
     <body>
-        <div class="login">
-            <h1>Insert the teams that will play</h1>
-            <form action="{{ url_for('predict')}}" method="post">
-                <input type="text" name="home_team" placeholder="Home Team" required="required" />
-                <input type="text" name="away_team" placeholder="Away Team" required="required" />
-                <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
-            </form>
-        </div>
-        {{prediction_text}}
+
+        <h1>Welcome to NBA predictions!</h1>
+        <ul style="list-style-type:none; display:flex; flex-wrap: wrap; gap: 20px;">
+          <li>        <img src="https://cdn.nba.com/logos/nba/1610612737/primary/L/logo.svg" alt="Atlanta Hawks logo" />
+            <span>ATL</span>
+            <span>Atlanta Hawks</span></li>
+          <li> <img src="https://cdn.nba.com/logos/nba/1610612738/primary/L/logo.svg" alt="Boston Celtics logo" />
+            <span>BOS</span>
+            <span>Boston Celtics</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612751/primary/L/logo.svg" alt="Brooklyn Nets logo" />
+            <span>BKN</span>
+            <span>Brooklyn Nets</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612766/primary/L/logo.svg" alt="Charlotte Hornets logo" />
+            <span>CHA</span>
+            <span>Charlotte Hornets</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612741/primary/L/logo.svg" alt="Chicago Bulls logo" />
+            <span>CHI</span>
+            <span>Chicago Bulls</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612739/primary/L/logo.svg" alt="Cleveland Cavaliers logo" />
+            <span>CLE</span>
+            <span>Cleveland Cavaliers</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612742/primary/L/logo.svg" alt="Dallas Mavericks logo" />
+            <span>DAL</span>
+            <span>Dallas Mavericks</span></li>
+            <div class="prediction">
+                <h2>Make a prediction</h2>
+                <form action="{{ url_for('predict') }}" method="post">
+                  <div class="form-group">
+                    <label for="home-team">Home Team:</label>
+                    <input type="text" class="form-control" id="home-team" name="home_team" placeholder="Enter Home Team" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="away-team">Away Team:</label>
+                    <input type="text" class="form-control" id="away-team" name="away_team" placeholder="Enter Away Team" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Predict</button>
+                </form>
+                <div class="prediction-text">{{ prediction_text }}</div>
+              </div>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612743/primary/L/logo.svg" alt="Denver Nuggets logo" />
+            <span>DEN</span>
+            <span>Denver Nuggets</span></li>
+            
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612765/primary/L/logo.svg" alt="Detroit Pistons logo" />
+            <span>DET</span>
+            <span>Detroit Pistons</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612744/primary/L/logo.svg" alt="Golden State Warriors logo" />
+            <span>GSW</span>
+            <span>Golden State Warriors</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612745/primary/L/logo.svg" alt="Houston Rockets logo" />
+            <span>HOU</span>
+            <span>Houston Rockets</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612754/primary/L/logo.svg" alt="Indiana Pacers logo" />
+            <span>IND</span>
+            <span>Indiana Pacers</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612746/primary/L/logo.svg" alt="Los Angeles Clippers logo" />
+            <span>LAC</span>
+            <span>Los Angeles Clippers</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg" alt="Los Angeles Lakers logo" />
+            <span>LAL</span>
+            <span>Los Angeles Lakers</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612763/primary/L/logo.svg" alt="Memphis Grizzlies logo" />
+            <span>MEM</span>
+            <span>Memphis Grizzlies</span></li>
+            
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612748/primary/L/logo.svg" alt="Miami Heat logo" />
+            <span>MIA</span>
+            <span>Miami Heat</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612749/primary/L/logo.svg" alt="Milwaukee Bucks logo" />
+            <span>MIL</span>
+            <span>Milwaukee Bucks</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612750/primary/L/logo.svg" alt="Minnesota Timberwolves logo" />
+            <span>MIN</span>
+            <span>Minnesota Timberwolves</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612740/primary/L/logo.svg" alt="New Orleans Pelicans logo" />
+            <span>NOP</span>
+            <span>New Orleans Pelicans</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612752/primary/L/logo.svg" alt="New York Knicks logo" />
+            <span>NYK</span>
+            <span>New York Knicks</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612760/primary/L/logo.svg" alt="Oklahoma City Thunder logo" />
+            <span>OKC</span>
+            <span>Oklahoma City Thunder</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612753/primary/L/logo.svg" alt="Orlando Magic logo" />
+            <span>ORL</span>
+            <span>Orlando Magic</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612755/primary/L/logo.svg" alt="Philadelphia 76ers logo" />
+            <span>PHI</span>
+            <span>Philadelphia 76ers</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612756/primary/L/logo.svg" alt="Phoenix Suns logo" />
+            <span>PHX</span>
+            <span>Phoenix Suns</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612757/primary/L/logo.svg" alt="Portland Trail Blazers logo" />
+            <span>POR</span>
+            <span>Portland Trail Blazers</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612758/primary/L/logo.svg" alt="Sacramento Kings logo" />
+            <span>SAC</span>
+            <span>Sacramento Kings</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612759/primary/L/logo.svg" alt="San Antonio Spurs logo" />
+            <span>SAS</span>
+            <span>San Antonio Spurs</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612761/primary/L/logo.svg" alt="Toronto Raptors logo" />
+            <span>TOR</span>
+            <span>Toronto Raptors</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612762/primary/L/logo.svg" alt="Utah Jazz logo" />
+            <span>UTA</span>
+            <span>Utah Jazz</span></li>
+            <li> <img src="https://cdn.nba.com/logos/nba/1610612764/primary/L/logo.svg" alt="Washington Wizards logo" />
+            <span>WAS</span>
+            <span>Washington Wizards</span></li>
+            </ul>
+
+              
 
             
             
-            <div class="footer">
-                <p>Footer</p>
+            <footer>
+                <p>Created by João Thomaz Lemos, a passionate data enthusiast.</p>
+                <p>Connect with me on <a href="https://www.linkedin.com/in/joaothomazlemos/">LinkedIn</a>.</p>
+            </footer>
             </div>
         </div>
     </body>
