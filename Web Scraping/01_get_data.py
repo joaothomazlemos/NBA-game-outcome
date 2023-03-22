@@ -4,7 +4,7 @@ from playwright.sync_api import sync_playwright, TimeoutError as playwrightTimeo
 import time
 
 #SEASONS = list(range(2016, 2023))
-SEASONS = [2022]
+SEASONS = [2018, 2019, 2020, 2021, 2022, 2023]
 
 
 DATA_DIR = 'data'
@@ -12,6 +12,18 @@ STANDINGS_DIR = os.path.join(DATA_DIR, 'standings') # data2 is a directory where
 SCORES_DIR = os.path.join(DATA_DIR, 'scores')
 
 def get_html(url, selector, sleep=7, retries=3): # async allow the code after it to imediatelly execute. 
+    """ Info:
+     This function will get the html content of a page and return it as a html file
+      --------------------------------------------------------------------------------
+       Input:
+        url: url of the page to be scraped  
+        selector: selector of the html element to be scraped
+        sleep: time to wait between each try in seconds
+        retries: number of tries to get the html content of each page
+        --------------------------------------------------------------------------------
+        Output:
+        html: html content of the page
+        """
     html=None
     for i in range(1, retries+1):
         time.sleep(sleep * i) # each try is longer by a sleep multiplication factor
@@ -35,6 +47,15 @@ def get_html(url, selector, sleep=7, retries=3): # async allow the code after it
         print('Fail')
 
 def scrapy_season(season):
+    """ Info:
+        This function will scrape the standings of a season and save them in a html file
+        --------------------------------------------------------------------------------
+        Input:
+            season: season to be scraped
+            --------------------------------------------------------------------------------
+            Output:
+            None
+            """
     url  = f"https://www.basketball-reference.com/leagues/NBA_{season}_games.html"
     
     
@@ -46,7 +67,7 @@ def scrapy_season(season):
 
         
 
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = BeautifulSoup(html, 'html.parser') #type: ignore
     links = soup.find_all('a')
     href = [l['href'] for l in links] # l is a hyperlink for a month
     stadings_pages = [f"https://www.basketball-reference.com{l}" for l in href]
@@ -63,7 +84,7 @@ def scrapy_season(season):
         else:
             print(f'attempt to get the {url} content succeds!')
         with open (save_path, 'w+') as f:
-            f.write(html) # content to be saved in the file  with specified name
+            f.write(html) #type: ignore # content to be saved in the file  with specified name
     
 
 
