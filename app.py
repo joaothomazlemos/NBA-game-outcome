@@ -67,7 +67,7 @@ def predict():
     if (len(request_data['home_team']) != 3) or (len(request_data['away_team']) != 3):
         return jsonify({'error': 'Team name should have 3 letters format'})
     # raising an error if the team names are not all in caps, using asssert
-    if not (request_data['home_team'].isupper()) or (request_data['away_team'].isupper()):
+    if not ((request_data['home_team'].isupper()) or (request_data['away_team'].isupper())):
         return jsonify({'error': 'Team name should be in all capital letters format'})
     if 'home_team' not in request_data or 'away_team' not in request_data:
         return jsonify({'error': 'home_team and away_team are required'})
