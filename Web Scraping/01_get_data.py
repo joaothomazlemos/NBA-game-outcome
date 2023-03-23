@@ -6,6 +6,8 @@ import time
 #SEASONS = list(range(2016, 2023))
 SEASONS = [2018, 2019, 2020, 2021, 2022, 2023]
 
+# list all files in the current directory and prints them
+print("Files in '%s': %s" % (os.getcwd(), os.listdir(os.getcwd())))
 
 DATA_DIR = 'data'
 STANDINGS_DIR = os.path.join(DATA_DIR, 'standings') # data is a directory where standings will be located inside
