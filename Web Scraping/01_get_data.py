@@ -8,7 +8,7 @@ SEASONS = [2018, 2019, 2020, 2021, 2022, 2023]
 
 
 DATA_DIR = 'data'
-STANDINGS_DIR = os.path.join(DATA_DIR, 'standings') # data2 is a directory where standings will be located inside
+STANDINGS_DIR = os.path.join(DATA_DIR, 'standings') # data is a directory where standings will be located inside
 SCORES_DIR = os.path.join(DATA_DIR, 'scores')
 
 def get_html(url, selector, sleep=7, retries=3): # async allow the code after it to imediatelly execute. 
@@ -74,6 +74,8 @@ def scrapy_season(season):
 #ok
     for url in stadings_pages: # navigate for each month page to save the file name first
         save_path = os.path.join(STANDINGS_DIR, url.split('/')[-1]) # saving in directory the name of the schedule month
+        #print the save path
+        print("save_path: ", save_path)
         if os.path.exists(save_path):
             continue
 
@@ -83,8 +85,9 @@ def scrapy_season(season):
             print(f'still nothing on the first attempt to get the whole {url} content')
         else:
             print(f'attempt to get the {url} content succeds!')
-        with open (save_path, 'w+') as f:
-            f.write(html) #type: ignore # content to be saved in the file  with specified name
+        
+        with open (save_path, 'x') as f: # save_path is the name of the file that will be created (x is to create a new file to write)
+            f.write(html) #type: ignore # content to be saved in the file  with specified name of save_path
     
 
 
