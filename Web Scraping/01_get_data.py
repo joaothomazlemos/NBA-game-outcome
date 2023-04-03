@@ -2,9 +2,19 @@ from bs4 import BeautifulSoup
 import os
 from playwright.sync_api import sync_playwright, TimeoutError as playwrightTimeout
 import time
+import datetime
+import re
+
+#This function will get the html month content of a page and return it as a html file.
+#This month html files will contain the box scores of each game of the month.
+#Keep in mind that, getting th e boxes scores of a currenty month can be tricy.
+#This function needs to get the html file of the currently month everytime,
+#because the html file of the currently month is updated every day, adding mors boxscores.
+#This function will be called every day to get the updated html file of the currently month.
 
 #SEASONS = list(range(2016, 2023))
 SEASONS = [2018, 2019, 2020, 2021, 2022, 2023]
+SEASONS = [2023]
 
 # list all files in the current directory and prints them
 print("Files in '%s': %s" % (os.getcwd(), os.listdir(os.getcwd())))
@@ -12,6 +22,12 @@ print("Files in '%s': %s" % (os.getcwd(), os.listdir(os.getcwd())))
 DATA_DIR = 'data'
 STANDINGS_DIR = os.path.join(DATA_DIR, 'standings') # data is a directory where standings will be located inside
 SCORES_DIR = os.path.join(DATA_DIR, 'scores')
+
+#currenty date
+now = datetime.datetime.now()
+#currenty month name in lower case
+ACTUAL_MONTH = now.strftime("%B").lower()
+
 
 def get_html(url, selector, sleep=7, retries=3): # async allow the code after it to imediatelly execute. 
     """ Info:
@@ -78,9 +94,18 @@ def scrapy_season(season):
         save_path = os.path.join(STANDINGS_DIR, url.split('/')[-1]) # saving in directory the name of the schedule month
         #print the save path
         print("save_path: ", save_path)
-        if os.path.exists(save_path):
-            continue
 
+        #checking if the file already exists except for the current month that needs to be downloaded everytime
+        if os.path.exists(save_path) and season != SEASONS[-1]: # if the file already exists and it is not the current season
+            continue
+        elif os.path.exists(save_path) and not re.search(ACTUAL_MONTH, save_path): # if the file already exists and it is the current season
+            continue
+        #So if is the current month and season, execute the scraping of the current month
+        #
+        #Deleting the current month file to get the updated version
+        if os.path.exists(save_path) and re.search(ACTUAL_MONTH, save_path):
+            os.remove(save_path)
+            print(f'file {save_path} deleted')
         #grabbing table of month
         html = get_html(url=url, selector='#all_schedule')
         if html == None:
