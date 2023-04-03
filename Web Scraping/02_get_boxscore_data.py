@@ -217,7 +217,7 @@ compress(file_names, SCORES_DIR, output_path)
 #excluding the html files from the past data that was compressed in the compressed_games.zip file
 #deleting files
 
-box_scores = os.listdir(SCORES_DIR)
+box_scores = [file for file in os.listdir(SCORES_DIR) if '.html' in file]
 for file in tqdm(box_scores):
     os.remove(os.path.join(SCORES_DIR, file))
 print('All html past files deleted')
