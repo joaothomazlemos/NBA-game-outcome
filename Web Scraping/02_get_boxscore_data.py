@@ -95,7 +95,7 @@ def get_html(url, selector, sleep=7, retries=3): # async allow the code after it
 
         try:
             with sync_playwright() as p: # istance of playwright object
-                browser = p.firefox.launch() # await will actually wait for the async load of the website complete to lauch the browser
+                browser = p.firefox.launch(executable_path= "C:/Users/Usuario/AppData/Local/ms-playwright/firefox-1369/firefox/firefox.exe") # await will actually wait for the async load of the website complete to lauch the browser
                 #context = browser.new_context()
                 page = browser.new_page() # page will be a new tab
                 page.goto(url)
