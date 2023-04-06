@@ -47,8 +47,9 @@ def get_html(url, selector, sleep=7, retries=3): # async allow the code after it
         time.sleep(sleep * i) # each try is longer by a sleep multiplication factor
 
         try:
-            with sync_playwright() as p: # istance of playwright object
-                browser = p.firefox.launch() # await will actually wait for the async load of the website complete to lauch the browser
+            
+            with sync_playwright() as p: # istance of playwright object. You may have to specify the path of the executable file of the browser you want to use.
+                browser = p.firefox.launch(executable_path= "C:/Users/Usuario/AppData/Local/ms-playwright/firefox-1369/firefox/firefox.exe") # await will actually wait for the async load of the website complete to lauch the browser
                 #context = browser.new_context()
                 page = browser.new_page() # page will be a new tab
                 page.goto(url)
@@ -113,7 +114,7 @@ def scrapy_season(season):
         else:
             print(f'attempt to get the {url} content succeds!')
         
-        with open (save_path, 'x') as f: # save_path is the name of the file that will be created (x is to create a new file to write)
+        with open (save_path, 'w+') as f: # save_path is the name of the file that will be created (x is to create a new file to write)
             f.write(html) #type: ignore # content to be saved in the file  with specified name of save_path
     
 
