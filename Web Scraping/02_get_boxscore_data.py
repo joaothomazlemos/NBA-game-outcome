@@ -30,8 +30,17 @@ ACTUAL_MONTH = str(now.month).zfill(2) # zfill is a method that adds a 0 to the 
 #checking if it is the first day of the month, which means that we have to move the data of the previous month to the compressed_games.zip file
 # if it is the first day of the month
     #we have to move the data of the previous month to the compressed_games.zip file
- 
-if now.day == 1:
+# also, if it is day 1, we can decompress the compressed_games.zip file, and put it together with previous month data, to then compress it again all together.
+
+#note: if is the first time running the app, the application will have to run as if is day 1, so we get all past years data properly. As it is, we just gether the actual month data
+#day = 1
+day = now.day
+if day == 1:
+        if os.path.exists(DATA_DIR+'compressed_games.zip'): # if the compressed_games.zip file exists
+        #decompressing the compressed_games.zip file to the scores directory
+            with zipfile.ZipFile(os.path.join(SCORES_DIR, 'compressed_games.zip'), 'r') as zip_ref:
+                zip_ref.extractall(SCORES_DIR)
+        #we have to move the data of the previous month to the compressed_games.zip file
         for file in os.listdir(ACTUAL_MONTH_SCORES_DIR):
             shutil.move(os.path.join(ACTUAL_MONTH_SCORES_DIR, file), os.path.join(SCORES_DIR, file)) 
 
@@ -186,40 +195,48 @@ def scrape_boxscores(standing_file, season_year): # getting the paths of the htm
                 f.write(html) # content to be saved in the file  with specified name
 
 #STARTING TO GRAB OUR DATA
+#if the day is the first of the month, we will have th edecompressed past files, so this function will try to scrape them all, but 
+# it also checks if the file exists,  so we dont scrape the same file twice. Is usefull if we have nothing, we just set the day to 1 and run the script
+# also needed to join previous data with this past data
+if day == 1:
+    standing_file_names = os.listdir(STANDINGS_DIR) # list of our filename of standings
+    #filtering just elements we want
+    standing_file_names = [file for file in standing_file_names if '.html' in file]
+    #creating the paths names and the scraping, for each season
+    for season_year in SEASONS :
+        print(f'Scraping the box scores of the {season_year} season')
+        season_files = [file for file in standing_file_names if str(season_year) in file]
+        for file in season_files: 
+            file_path = os.path.join(STANDINGS_DIR, file)
+            scrape_boxscores(file_path, season_year=season_year)
 
-standing_file_names = os.listdir(STANDINGS_DIR) # list of our filename of stanfdings
-#filtering just elements we want
-standing_file_names = [file for file in standing_file_names if '.html' in file]
+#scraping the actual month, same code as before, but we are only scraping the actual month
+standing_file_names = os.listdir(STANDINGS_DIR) # list of our filename of standings
+#filtering just elements we want ( in this case, just the actual month of the currenty season)
+standing_file_name_actual = [file for file in standing_file_names if (ACTUAL_MONTH and str(SEASONS[-1])) in file]
 #creating the paths names and the scraping, for each season
-for season_year in SEASONS :
-    print(f'Scraping the box scores of the {season_year} season')
-    season_files = [file for file in standing_file_names if str(season_year) in file]
-    for file in season_files: 
-        file_path = os.path.join(STANDINGS_DIR, file)
-        scrape_boxscores(file_path, season_year=season_year)
+
+file_path = os.path.join(STANDINGS_DIR, standing_file_name_actual[0])
+scrape_boxscores(file_path, season_year=SEASONS[-1])
 
 
-#decompressing all files of the compressed_games.zip file in the scores directory 
-# if the compressed file exists and it is the first day of the month, where
-# we are going to take the data of the previous month and join with all our past data
-if os.path.exists(DATA_DIR+'compressed_games.zip') and now.day == 1:
-    with zipfile.ZipFile(DATA_DIR+'compressed_games.zip', 'r') as zip_ref:
-        zip_ref.extractall(SCORES_DIR)
 
 
-#compressing the files in the scores directory (except the actual month)
+#compressing the files in the scores directory (except the actual month), if is day 1
 #and saving the compressed file in the data directory
-file_names = os.listdir(SCORES_DIR)
-file_names = [file for file in file_names if '.html' in file]
-output_path = DATA_DIR
-compress(file_names, SCORES_DIR, output_path)
+#day means that there are past files to compress, or past files + prevoius month to compress
+if day == 1:
+    file_names = os.listdir(SCORES_DIR)
+    file_names = [file for file in file_names if '.html' in file]
+    output_path = DATA_DIR
+    compress(file_names, SCORES_DIR, output_path)
 
-#excluding the html files from the past data that was compressed in the compressed_games.zip file
-#deleting files
+    #excluding the html files from the past data that was compressed in the compressed_games.zip file
+    #deleting files
 
-box_scores = [file for file in os.listdir(SCORES_DIR) if '.html' in file]
-for file in tqdm(box_scores):
-    os.remove(os.path.join(SCORES_DIR, file))
+    box_scores = [file for file in os.listdir(SCORES_DIR) if '.html' in file]
+    for file in tqdm(box_scores):
+        os.remove(os.path.join(SCORES_DIR, file))
 print('All html past files deleted')
 print("Automated scraping and files organization finished!")
 

@@ -12,8 +12,8 @@ import re
 #because the html file of the currently month is updated every day, adding mors boxscores.
 #This function will be called every day to get the updated html file of the currently month.
 
-#SEASONS = list(range(2016, 2023))
-SEASONS = [2018, 2019, 2020, 2021, 2022, 2023]
+#SEASONS = [2018, 2019, 2020, 2021, 2022, 2023]
+#checks just the current season if this is not the first time running the code
 SEASONS = [2023]
 
 # list all files in the current directory and prints them
