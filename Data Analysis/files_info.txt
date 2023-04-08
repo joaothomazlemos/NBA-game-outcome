@@ -1,3 +1,5 @@
 data_base.pkl comes from end of notebook 01, and it is data ready for training
  (with home teams + opponents, and away teams+ opponents ).
-production_df.pkl comes from beggining of notebook 01, and I dont know its purpose right now.
+ 
+production_df.pkl comes from beggining of notebook 01, and I has all the NBA games. It is meant to be upgraded everyday
+and its from this data that our input is formed, using the last 6 games of each team.
