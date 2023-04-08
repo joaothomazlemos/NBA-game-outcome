@@ -1,0 +1,3 @@
+data_base.pkl comes from end of notebook 01, and it is data ready for training
+ (with home teams + opponents, and away teams+ opponents ).
+production_df.pkl comes from beggining of notebook 01, and I dont know its purpose right now.
