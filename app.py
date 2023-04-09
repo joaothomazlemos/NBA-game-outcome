@@ -15,7 +15,7 @@ warnings.filterwarnings('ignore', message='X does not have valid feature names, 
 app = Flask(__name__)
 
 # load the logistic regression model
-model = pickle.load(open('Data Analysis/models_2/LogisticRegression_50.pkl', 'rb'))
+model = pickle.load(open('Data Analysis/models_2/RandomForest_100.pkl', 'rb'))
 
 # load the NBA games dataset from the pickle file
 games = pickle.load(open('Data Analysis/production_df.pkl', 'rb'))
@@ -59,7 +59,7 @@ def predict():
     
     #request_data = request.get_json() # if the request is in json format to pass in POSTMAN for example
     # get the team names from the request to a list with the teams names
-    request_data = [str(x) for x in request.form.values()]
+    request_data = [str(x) for x in request.form.values()] #type: ignore
     #passing the name sin the list to a dictionary, with keyvalues 'home_team' and 'away_team'
     request_data = {'home_team': request_data[0], 'away_team': request_data[1]}
     
