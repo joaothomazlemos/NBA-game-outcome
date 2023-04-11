@@ -249,7 +249,7 @@ def scrape_boxscores(standing_file, season_year): # getting the paths of the htm
     with open(standing_file,'r') as f:
         html = f.read()
 
-    soup = BeautifulSoup(html, 'html.parser', )
+    soup = BeautifulSoup(html, 'html.parser' )
     links = soup.find_all('a')
     hrefs = [l.get('href') for l in links]
     box_scores = [href for href in hrefs if href and 'boxscore' in href and '.html' in href]
@@ -302,6 +302,7 @@ def scrape_boxscores(standing_file, season_year): # getting the paths of the htm
 # it also checks if the file exists,  so we dont scrape the same file twice. Is usefull if we have nothing, we just set the day to 1 and run the script
 # also needed to join previous data with this past data
 if day == 1:
+    print('Scraping the box scores of the past seasons, this is the first time we run our code or is day 1.')
     standing_file_names = os.listdir(STANDINGS_DIR) # list of our filename of standings
     #filtering just elements we want
     standing_file_names = [file for file in standing_file_names if '.html' in file]
@@ -387,7 +388,7 @@ def clean_html(box_score):
     with open(box_score, 'r', encoding="utf-8", errors='ignore') as f:
         html = f.read()
     
-    soup = BeautifulSoup(html)
+    soup = BeautifulSoup(html, 'html.parser')
     [f.decompose() for f in soup.select('tr.over_header')]
     [f.decompose() for f in soup.select('tr.thead')]
    
