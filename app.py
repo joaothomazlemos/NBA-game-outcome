@@ -18,7 +18,7 @@ app = Flask(__name__)
 model = pickle.load(open('Data Analysis/models_2/RandomForestClassifier_100.pkl', 'rb'))
 
 # load the NBA games dataset from the pickle file
-games = pickle.load(open('Data Analysis/production_df.pkl', 'rb'))
+games = pickle.load(open('production_df.pkl', 'rb'))
 
 # Loadings the best 50 features
 best_features = pd.read_csv('Data Analysis/best_features/PCA_100.csv')
