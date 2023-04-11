@@ -329,6 +329,7 @@ scrape_boxscores(file_path, season_year=SEASONS[-1])
 #and saving the compressed file in the data directory
 #day means that there are past files to compress, or past files + prevoius month to compress
 if day == 1:
+    print(f'Today is day {day}, Compressing the past files in the compressed_games.zip file, then removing it from the scores directory')
     file_names = os.listdir(SCORES_DIR)
     file_names = [file for file in file_names if '.html' in file]
     output_path = DATA_DIR
