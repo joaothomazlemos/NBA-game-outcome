@@ -453,21 +453,22 @@ def get_game_season(soup):
 
 #Getting the names of or downloaded boxscore in a list if it is the first time running the code
 
+first_time = False
+
 #first, we decompress the compressed_games.zip file
-import zipfile
-import os
-with zipfile.ZipFile(os.path.join(DATA_DIR, 'compressed_games.zip'), 'r') as zip_ref:
-    zip_ref.extractall(SCORE_DIR)
+if first_time:
+    with zipfile.ZipFile(os.path.join(DATA_DIR, 'compressed_games.zip'), 'r') as zip_ref:
+        zip_ref.extractall(SCORE_DIR)
 
-#then, we get the names of the files in the directory
-box_scores_old = os.listdir(SCORE_DIR)
+    #then, we get the names of the files in the directory
+    box_scores_old = os.listdir(SCORE_DIR)
 
-# joining the names of the boxscores with ther directory to a list of html files
-box_scores_old = [os.path.join(SCORE_DIR, file) for file in box_scores_old if file.endswith('.html')] # file names
+    # joining the names of the boxscores with ther directory to a list of html files
+    box_scores_old = [os.path.join(SCORE_DIR, file) for file in box_scores_old if file.endswith('.html')] # file names
 
-print(f'we have {len(box_scores_old)} games scraped')
+    print(f'we have {len(box_scores_old)} games scraped')
 
-games_scores = box_scores_old
+    games_scores = box_scores_old
 
 
 box_scores = os.listdir(SCORE_DIR_ACTUAL)
@@ -668,5 +669,6 @@ df = del_cols(df, del_list)
 
 #saving the dataframe to pickle file
 df.to_pickle('production_df.pkl')
+print('Dataframe saved to pickle file, our production dataframe is ready to be used to generate new predictions!')
 
 
