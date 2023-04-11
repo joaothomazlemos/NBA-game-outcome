@@ -19,8 +19,7 @@ import re
 #checks just the current season if this is not the first time running the code
 SEASONS = [2023]
 
-# list all files in the current directory and prints them
-print("Files in '%s': %s" % (os.getcwd(), os.listdir(os.getcwd())))
+
 
 DATA_DIR = os.path.join('Web Scraping', 'data') # data is a directory where standings will be located inside
 STANDINGS_DIR = os.path.join(DATA_DIR, 'standings') # data is a directory where standings will be located inside
@@ -161,7 +160,7 @@ SEASONS = [2023]
 now = datetime.datetime.now()
 ACTUAL_MONTH = str(now.month).zfill(2) # zfill is a method that adds a 0 to the left of the string if it has only one digit
 #ACTUAL_YEAR = str(now.year)
-
+print(f'actual month: {ACTUAL_MONTH}, actual year: {now.year}, actual day: {now.day}')
 #checking if it is the first day of the month, which means that we have to move the data of the previous month to the compressed_games.zip file
 # if it is the first day of the month
     #we have to move the data of the previous month to the compressed_games.zip file
@@ -173,6 +172,7 @@ ACTUAL_MONTH = str(now.month).zfill(2) # zfill is a method that adds a 0 to the 
 #day = 1
 day = now.day
 if day == 1:
+        print(f'Today is the first {day} of the month, so we have to move the data of the previous month to the compressed_games.zip file')
         if os.path.exists(DATA_DIR+'compressed_games.zip'): # if the compressed_games.zip file exists
         #decompressing the compressed_games.zip file to the scores directory
             with zipfile.ZipFile(os.path.join(SCORES_DIR, 'compressed_games.zip'), 'r') as zip_ref:
@@ -249,7 +249,7 @@ def scrape_boxscores(standing_file, season_year): # getting the paths of the htm
     with open(standing_file,'r') as f:
         html = f.read()
 
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = BeautifulSoup(html, 'html.parser', )
     links = soup.find_all('a')
     hrefs = [l.get('href') for l in links]
     box_scores = [href for href in hrefs if href and 'boxscore' in href and '.html' in href]
@@ -301,7 +301,7 @@ def scrape_boxscores(standing_file, season_year): # getting the paths of the htm
 #if the day is the first of the month, we will have th edecompressed past files, so this function will try to scrape them all, but 
 # it also checks if the file exists,  so we dont scrape the same file twice. Is usefull if we have nothing, we just set the day to 1 and run the script
 # also needed to join previous data with this past data
-if day == 0:
+if day == 1:
     standing_file_names = os.listdir(STANDINGS_DIR) # list of our filename of standings
     #filtering just elements we want
     standing_file_names = [file for file in standing_file_names if '.html' in file]
