@@ -1,5 +1,5 @@
 
-# Can i talk with chatGPT from here?
+
 
 class ModelParams:
         

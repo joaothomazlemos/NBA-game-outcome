@@ -15,13 +15,13 @@ warnings.filterwarnings('ignore', message='X does not have valid feature names, 
 app = Flask(__name__)
 
 # load the logistic regression model
-model = pickle.load(open('Data Analysis/models_2/LogisticRegression_50.pkl', 'rb'))
+model = pickle.load(open('Data Analysis/models_2/RandomForestClassifier_100.pkl', 'rb'))
 
 # load the NBA games dataset from the pickle file
 games = pickle.load(open('Data Analysis/production_df.pkl', 'rb'))
 
 # Loadings the best 50 features
-best_features = pd.read_csv('Data Analysis/best_features/LogisticRegression_50.csv')
+best_features = pd.read_csv('Data Analysis/best_features/PCA_100.csv')
 
 # define the information columns. We are going to take out all this information to concatenate the rows of the last n games of the 2 teams
 #although, as the df is already date ordered, we are only using the 'Team' column to search for the last n games of each team. Is the col that we associate with the user input
@@ -59,7 +59,7 @@ def predict():
     
     #request_data = request.get_json() # if the request is in json format to pass in POSTMAN for example
     # get the team names from the request to a list with the teams names
-    request_data = [str(x) for x in request.form.values()]
+    request_data = [str(x) for x in request.form.values()] #type: ignore
     #passing the name sin the list to a dictionary, with keyvalues 'home_team' and 'away_team'
     request_data = {'home_team': request_data[0], 'away_team': request_data[1]}
     
@@ -111,7 +111,8 @@ def predict():
         winner = away_team
 
     # return the prediction with render_template
-    return render_template('home.html', prediction_text='The predicted winner is {} with certainty of {:.1%}'.format(winner, prob))
+    return render_template('home.html',
+         prediction_text='You choose to see who will win in the game between {} and {}.\n The predicted winner is {} with certainty of {:.1%}'.format(home_team, away_team,winner, prob))
 
    # return the prediction as a JSON object
     return jsonify(f'The predicted winner is {winner} with certainty of {prob: .1%}')

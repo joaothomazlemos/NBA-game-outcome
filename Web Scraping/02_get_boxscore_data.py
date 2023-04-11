@@ -32,6 +32,8 @@ ACTUAL_MONTH = str(now.month).zfill(2) # zfill is a method that adds a 0 to the 
     #we have to move the data of the previous month to the compressed_games.zip file
 # also, if it is day 1, we can decompress the compressed_games.zip file, and put it together with previous month data, to then compress it again all together.
 
+#day = 0 Set this if you want to scrape all the data ( like if you are running the code for the first time)
+
 #note: if is the first time running the app, the application will have to run as if is day 1, so we get all past years data properly. As it is, we just gether the actual month data
 #day = 1
 day = now.day
@@ -103,8 +105,9 @@ def get_html(url, selector, sleep=7, retries=3): # async allow the code after it
         time.sleep(sleep * i) # each try is longer by a sleep multiplication factor
 
         try:
-            with sync_playwright() as p: # istance of playwright object
-                browser = p.firefox.launch(executable_path= "C:/Users/Usuario/AppData/Local/ms-playwright/firefox-1369/firefox/firefox.exe") # await will actually wait for the async load of the website complete to lauch the browser
+            with sync_playwright() as p: # instance of playwright object
+                #executable_path= "C:/Users/Usuario/AppData/Local/ms-playwright/firefox-1369/firefox/firefox.exe"
+                browser = p.firefox.launch() # await will actually wait for the async load of the website complete to lauch the browser
                 #context = browser.new_context()
                 page = browser.new_page() # page will be a new tab
                 page.goto(url)
@@ -198,7 +201,7 @@ def scrape_boxscores(standing_file, season_year): # getting the paths of the htm
 #if the day is the first of the month, we will have th edecompressed past files, so this function will try to scrape them all, but 
 # it also checks if the file exists,  so we dont scrape the same file twice. Is usefull if we have nothing, we just set the day to 1 and run the script
 # also needed to join previous data with this past data
-if day == 1:
+if day == 0:
     standing_file_names = os.listdir(STANDINGS_DIR) # list of our filename of standings
     #filtering just elements we want
     standing_file_names = [file for file in standing_file_names if '.html' in file]
