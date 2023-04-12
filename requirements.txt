@@ -7,10 +7,7 @@ django
 requests
 bs4
 playwright
-shutil
-zipfile
 tqdm
-IPython
 pandas
 matplotlib
 sqlalchemy
