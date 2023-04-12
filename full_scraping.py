@@ -141,7 +141,6 @@ import os, sys, shutil, gzip
 import zlib
 import zipfile
 from tqdm import tqdm
-from IPython.display import clear_output
 import re
 
 
