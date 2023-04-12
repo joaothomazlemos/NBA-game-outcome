@@ -7,7 +7,6 @@ django
 requests
 bs4
 playwright
-os
 shutil
 zipfile
 tqdm
