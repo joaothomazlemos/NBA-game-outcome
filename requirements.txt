@@ -6,7 +6,7 @@ gunicorn
 django
 requests
 bs4
-re
+regex
 playwright
 os
 shutil
