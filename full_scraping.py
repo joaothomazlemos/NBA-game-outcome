@@ -318,6 +318,8 @@ print('Scraping the box scores of the actual month of the current season')
 standing_file_names = os.listdir(STANDINGS_DIR) # list of our filename of standings
 #filtering just elements we want ( in this case, just the actual month of the currenty season)
 standing_file_name_actual = [file for file in standing_file_names if (ACTUAL_MONTH and str(SEASONS[-1])) in file]
+
+print(f'Standings files: {standing_file_name_actual}')
 #creating the paths names and the scraping, for each season
 
 file_path = os.path.join(STANDINGS_DIR, standing_file_name_actual[0])
