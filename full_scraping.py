@@ -576,7 +576,8 @@ pickle.dump(games_ids, open(os.path.join('Web Scraping', 'games_ids.pkl'), 'wb')
 
 nba_games_db_path = os.path.join('Web Scraping', 'nba_games.db')
 # creating a database
-engine = sqlalchemy.create_engine('sqlite:///' + nba_games_db_path, echo=False)
+engine = sqlalchemy.create_engine('sqlite:///' + nba_games_db_path, echo=False, pool_pre_ping=True)
+print('engine created!')
 
 # saving our parsed games in a dataframe 
 if games: 
