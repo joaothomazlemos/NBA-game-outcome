@@ -577,10 +577,15 @@ nba_games_db_path = os.path.join('Web Scraping', 'nba_games.db')
 # creating a database
 engine = sqlalchemy.create_engine('sqlite:///' + nba_games_db_path, echo=False, pool_pre_ping=True)
 print('engine created!')
+#reading the database to a dataframe
+df_allgames = pd.read_sql('SELECT * FROM nba_games', con=engine)
 
 # saving our parsed games in a dataframe 
 if games: 
     df_games = pd.concat(games, axis=0, ignore_index=True) # stack rows of games, assuming all dfs have the same columns
+    #trating df_games to have the same columns as df_allgames
+    df_games = df_games[df_allgames.columns]
+
     
 
     # saving to database
