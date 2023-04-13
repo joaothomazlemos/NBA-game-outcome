@@ -607,7 +607,7 @@ else:
 
 
 # reading from database
-df_allgames = pd.read_sql('SELECT * FROM nba_games', con=engine)
+df_allgames = pd.read_sql(sql=text(query), con=engine.connect())
 
 
 #deleting the extracted html files as we already saved them in a list as objects, in the past data scores directory
