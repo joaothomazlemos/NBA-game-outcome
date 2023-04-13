@@ -578,7 +578,7 @@ for box_score in tqdm(games_scores): # tqm to track progress.
         print(f'Corrupted box: {game_file_name}')
         continue
 
-
+from sqlalchemy import create_engine, text
    
 
 nba_games_db_path = os.path.join('Web Scraping', 'nba_games.db')
@@ -586,7 +586,8 @@ nba_games_db_path = os.path.join('Web Scraping', 'nba_games.db')
 engine = sqlalchemy.create_engine('sqlite:///' + nba_games_db_path, echo=False, pool_pre_ping=True)
 print('engine created!')
 #reading the database to a dataframe
-df_allgames = pd.read_sql('SELECT * FROM nba_games', con=engine)
+query = 'SELECT * FROM nba_games'
+df_allgames = pd.read_sql(sql=text(query), con=engine.connect())
 
 # saving our parsed games in a dataframe 
 if games: 
