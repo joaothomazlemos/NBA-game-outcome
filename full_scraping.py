@@ -646,7 +646,7 @@ pd.set_option('display.max_columns', None)
 
 engine = sqlalchemy.create_engine('sqlite:///' + nba_games_db_path)
 
-df = pd.read_sql('SELECT * FROM nba_games', con=engine)
+df = df_allgames.copy()
 
 
 df = df.loc[:, df.columns != 'ID'] #type: ignore
