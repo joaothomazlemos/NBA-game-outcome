@@ -569,8 +569,7 @@ for box_score in tqdm(games_scores): # tqm to track progress.
         print(f'Number of corrupted boxes: {count}')
         print(f'Corrupted box: {game_file_name}')
         continue
-#saving games ids into a file
-pickle.dump(games_ids, open(os.path.join('Web Scraping', 'games_ids.pkl'), 'wb'))
+
 
    
 
@@ -586,6 +585,8 @@ if games:
 
     # saving to database
     df_games.to_sql('nba_games', con=engine, if_exists='append', index=False)
+    #saving games new ids into a file
+    pickle.dump(games_ids, open(os.path.join('Web Scraping', 'games_ids.pkl'), 'wb'))
     print('new games added!')
 else:
     print('no new games added!')
