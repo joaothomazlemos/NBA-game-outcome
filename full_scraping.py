@@ -158,6 +158,7 @@ SEASONS = [2023]
 #get actual month and year strings using datetime library
 now = datetime.datetime.now()
 ACTUAL_MONTH = str(now.month).zfill(2) # zfill is a method that adds a 0 to the left of the string if it has only one digit
+ACTUAL_MONTH_NAME = now.strftime("%B") # getting the name of the actual month
 #ACTUAL_YEAR = str(now.year)
 print(f'actual month: {ACTUAL_MONTH}, actual year: {now.year}, actual day: {now.day}')
 #checking if it is the first day of the month, which means that we have to move the data of the previous month to the compressed_games.zip file
@@ -319,7 +320,7 @@ standing_file_names = os.listdir(STANDINGS_DIR) # list of our filename of standi
 #filtering just elements we want ( in this case, just the actual month of the currenty season)
 #taking only the current season, and the actual month file of standing_file_names
 
-standing_file_name_actual = [file for file in standing_file_names if str(SEASONS[-1]) in file and ACTUAL_MONTH in file]
+standing_file_name_actual = [file for file in standing_file_names if str(SEASONS[-1]) in file and ACTUAL_MONTH_NAME in file]
 
 
 print(f'Standings files: {standing_file_name_actual}')
