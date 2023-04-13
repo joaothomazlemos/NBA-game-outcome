@@ -574,14 +574,22 @@ pickle.dump(games_ids, open(os.path.join('Web Scraping', 'games_ids.pkl'), 'wb')
 
    
 
-# saving our parsed games in a dataframe 
-df_games = pd.concat(games, axis=0, ignore_index=True) # stack rows of games, assuming all dfs have the same columns
-
 nba_games_db_path = os.path.join('Web Scraping', 'nba_games.db')
 # creating a database
-engine = sqlalchemy.create_engine('sqlite:///' + nba_games_db_path, echo=False) 
-# saving to database
-df_games.to_sql('nba_games', con=engine, if_exists='append', index=False)
+engine = sqlalchemy.create_engine('sqlite:///' + nba_games_db_path, echo=False)
+
+# saving our parsed games in a dataframe 
+if games: 
+    df_games = pd.concat(games, axis=0, ignore_index=True) # stack rows of games, assuming all dfs have the same columns
+    
+
+    # saving to database
+    df_games.to_sql('nba_games', con=engine, if_exists='append', index=False)
+    print('new games added!')
+else:
+    print('no new games added!')
+
+
 # reading from database
 df_allgames = pd.read_sql('SELECT * FROM nba_games', con=engine)
 
