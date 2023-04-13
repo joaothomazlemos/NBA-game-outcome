@@ -158,7 +158,8 @@ SEASONS = [2023]
 #get actual month and year strings using datetime library
 now = datetime.datetime.now()
 ACTUAL_MONTH = str(now.month).zfill(2) # zfill is a method that adds a 0 to the left of the string if it has only one digit
-ACTUAL_MONTH_NAME = now.strftime("%B") # getting the name of the actual month
+# getting the name of the actual month in lower case
+ACTUAL_MONTH_NAME = now.strftime("%B").lower()
 #ACTUAL_YEAR = str(now.year)
 print(f'actual month: {ACTUAL_MONTH}, actual year: {now.year}, actual day: {now.day}')
 #checking if it is the first day of the month, which means that we have to move the data of the previous month to the compressed_games.zip file
