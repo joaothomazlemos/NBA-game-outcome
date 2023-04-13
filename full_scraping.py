@@ -313,6 +313,7 @@ if day == 1:
             file_path = os.path.join(STANDINGS_DIR, file)
             scrape_boxscores(file_path, season_year=season_year)
 
+print('Scraping the box scores of the actual month of the current season')
 #scraping the actual month, same code as before, but we are only scraping the actual month
 standing_file_names = os.listdir(STANDINGS_DIR) # list of our filename of standings
 #filtering just elements we want ( in this case, just the actual month of the currenty season)
