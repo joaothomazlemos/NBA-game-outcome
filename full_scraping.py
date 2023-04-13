@@ -693,7 +693,7 @@ df = del_cols(df, del_list)
 #saving the dataframe to pickle file
 df.to_pickle('production_df.pkl')
 #printing the last game date, based on the last row of the dataframe
-print('Last game date: {}'.format(df['date'].iloc[-1].strftime('%Y-%m-%d')))
+print('Last game date: {}'.format(df['date'].iloc[-1]))
 print('Dataframe saved to pickle file, our production dataframe is ready to be used to generate new predictions!')
 
 
