@@ -129,12 +129,14 @@
             <span>DAL</span>
             <span>Dallas Mavericks</span></li>
             <div class="prediction">
+                <h4>{{ message }}</h4>
                 <h2>Make a prediction</h2>
                 <h3>Example: Home Team: ATL, Away Team: BOS 
 
                 </h3>
                 <form action="{{ url_for('predict') }}" method="post">
                   <div class="form-group">
+                    
                     <label for="home-team">Home Team:</label>
                     <input type="text" class="form-control" id="home-team" name="home_team" placeholder="Enter Home Team" required>
                   </div>
@@ -226,6 +228,7 @@
             <footer>
                 <p>Created by João Thomaz Lemos, a passionate data enthusiast.</p>
                 <p>Connect with me on <a href="https://www.linkedin.com/in/joaothomazlemos/">LinkedIn</a>.</p>
+                <p>Latest scraped data: {{las}}</p>
             </footer>
             </div>
         </div>

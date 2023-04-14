@@ -4,6 +4,7 @@ from flask import Flask, request, app, jsonify, url_for, render_template
 import numpy as np
 import pandas as pd
 import warnings
+import datetime
 
 # The input are provided with feature names, as  we did in the training phase. So the warnings are not relevant. We are going to ignore them.
 warnings.filterwarnings('ignore', message='X does not have valid feature names, but StandardScaler was fitted with feature names')
@@ -19,6 +20,10 @@ model = pickle.load(open('Data Analysis/models_2/RandomForestClassifier_100.pkl'
 
 # load the NBA games dataset from the pickle file
 games = pickle.load(open('production_df.pkl', 'rb'))
+games['date'] = pd.to_datetime(games['date'])
+
+# Getting the most recent scraped data from games['date'] column
+last_date = datetime.datetime.strftime(games['date'].max(), "%d-%m-%Y")
 
 # Loadings the best 50 features
 best_features = pd.read_csv('Data Analysis/best_features/PCA_100.csv')
@@ -30,7 +35,7 @@ info_cols = ['date', 'Team', 'opponent_Team', 'season', 'home', 'WIN']
 # define the home page of the web app
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', message='Last atualization: ' + str(last_date))
 
 # define the predict API endpoint
 @app.route('/predict', methods=['POST'])
