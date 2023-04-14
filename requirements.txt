@@ -11,4 +11,5 @@ tqdm
 pandas
 matplotlib
 sqlalchemy
-seaborn 
+seaborn
+waitress 
