@@ -14,11 +14,37 @@
         <style>
             body {
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                background-color: #f1f1f1;
+                background-image: url('/static/images/fog_2.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+
+            label {
+                display: block;
+                font-size: 18px;
+                margin-bottom: 10px;
+                text-align: left;
+                font-weight: bold;
+                
+            }
+            a {
+                color: #1eadff;
+                text-decoration: none;
             }
             h1 {
                 text-align: center;
                 color: #1e90ff;
+                margin-top: 50px;
+            }
+            h2 {
+                text-align: center;
+                color: #1e92ff;
+                margin-top: 50px;
+            }
+            h3 {
+                
+                color: #1e92ff;
                 margin-top: 50px;
             }
             ul {
@@ -33,14 +59,14 @@
                 background-color: #fff;
                 color: #1e90ff;
                 font-weight: bold;
-                padding: 10px 20px;
+                padding: 3px 3px;
                 border-radius: 5px;
                 box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
                 text-align: center;
             }
             img {
                 display: block;
-                margin: 30px auto;
+                margin: 8px auto;
                 max-width: 60%;
             }
             .prediction {
@@ -91,6 +117,8 @@
             .prediction-text {
             font-size: 20px;
             margin-top: 20px;
+            font-weight: bold;
+        
             }
             
             
@@ -99,13 +127,37 @@
                 color: #fff;
                 text-align: center;
                 padding: 20px;
-                margin-top: 50px;
+                margin-top: 20px;
             }
+            footer div#content h2.special {
+                        color: rgb(48, 20, 206);
+                        text-align: left;
+                        }
         </style>
     </head>
     <body>
 
         <h1>Welcome to NBA predictions!</h1>
+        <div class="prediction">
+            <h4>{{ message }}</h4>
+            <h2>Make a prediction</h2>
+            <h3>Example -  Home Team: ATL (Atlanta Hawks), Away Team: BOS (Boston Celtics) 
+
+            </h3>
+            <form action="{{ url_for('predict') }}" method="post">
+              <div class="form-group">
+                
+                <label for="home-team">Home Team:</label>
+                <input type="text" class="form-control" id="home-team" name="home_team" placeholder="Enter Home Team" required>
+              </div>
+              <div class="form-group">
+                <label for="away-team">Away Team:</label>
+                <input type="text" class="form-control" id="away-team" name="away_team" placeholder="Enter Away Team" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Predict</button>
+            </form>
+            <div class="prediction-text">{{ prediction_text }}</div>
+          </div>
         <ul style="list-style-type:none; display:flex; flex-wrap: wrap; gap: 20px;">
           <li>        <img src="https://cdn.nba.com/logos/nba/1610612737/primary/L/logo.svg" alt="Atlanta Hawks logo" />
             <span>ATL</span>
@@ -128,26 +180,6 @@
             <li> <img src="https://cdn.nba.com/logos/nba/1610612742/primary/L/logo.svg" alt="Dallas Mavericks logo" />
             <span>DAL</span>
             <span>Dallas Mavericks</span></li>
-            <div class="prediction">
-                <h4>{{ message }}</h4>
-                <h2>Make a prediction</h2>
-                <h3>Example: Home Team: ATL, Away Team: BOS 
-
-                </h3>
-                <form action="{{ url_for('predict') }}" method="post">
-                  <div class="form-group">
-                    
-                    <label for="home-team">Home Team:</label>
-                    <input type="text" class="form-control" id="home-team" name="home_team" placeholder="Enter Home Team" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="away-team">Away Team:</label>
-                    <input type="text" class="form-control" id="away-team" name="away_team" placeholder="Enter Away Team" required>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Predict</button>
-                </form>
-                <div class="prediction-text">{{ prediction_text }}</div>
-              </div>
             <li> <img src="https://cdn.nba.com/logos/nba/1610612743/primary/L/logo.svg" alt="Denver Nuggets logo" />
             <span>DEN</span>
             <span>Denver Nuggets</span></li>
@@ -226,9 +258,10 @@
             
             
             <footer>
-                <p>Created by João Thomaz Lemos, a passionate data enthusiast.</p>
-                <p>Connect with me on <a href="https://www.linkedin.com/in/joaothomazlemos/">LinkedIn</a>.</p>
-                <p>Latest scraped data: {{las}}</p>
+            <div id="content">
+                <h2 class="special">Created by João Thomaz Lemos, a passionate data enthusiast.</h2>
+                <h2 class="special">Connect with me on <a href="https://www.linkedin.com/in/joaothomazlemos/">LinkedIn</a>.</h2>
+            </div>
             </footer>
             </div>
         </div>
