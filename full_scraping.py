@@ -52,7 +52,7 @@ def get_html(url, selector, sleep=7, retries=3): # async allow the code after it
             
             with sync_playwright() as p: # istance of playwright object. You may have to specify the path of the executable file of the browser you want to use.
                 #executable_path= "C:/Users/Usuario/AppData/Local/ms-playwright/firefox-1369/firefox/firefox.exe"
-                browser = p.firefox.launch(executable_path= "C:/Users/Usuario/AppData/Local/ms-playwright/firefox-1369/firefox/firefox.exe") # await will actually wait for the async load of the website complete to lauch the browser
+                browser = p.firefox.launch() # await will actually wait for the async load of the website complete to lauch the browser
                 #context = browser.new_context()
                 page = browser.new_page() # page will be a new tab
                 page.goto(url)
@@ -400,7 +400,7 @@ def clean_html(box_score):
     [f.decompose() for f in soup.select('tr.over_header')]
     [f.decompose() for f in soup.select('tr.thead')]
 
-    print('Box score readed and parsed to soup object')
+
    
 
     return soup
@@ -520,7 +520,14 @@ for box_score in tqdm(games_scores): # tqm to track progress.
     
     try:  # if html is somewaht corrupted, we go to the next
         soup = clean_html(box_score)
-        score_row = get_score_line(soup)
+    except:
+        print(f'{game_file_name} is corrupted and cant even be readed by beautiful soup')
+        count += 1
+        continue
+
+    score_row = get_score_line(soup) # this funtions has its own try except block
+    
+    try:
         
         all_stats = [] # this is resposible to store data from both teams
 
