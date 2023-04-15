@@ -52,7 +52,7 @@ def get_html(url, selector, sleep=7, retries=3): # async allow the code after it
             
             with sync_playwright() as p: # istance of playwright object. You may have to specify the path of the executable file of the browser you want to use.
                 #executable_path= "C:/Users/Usuario/AppData/Local/ms-playwright/firefox-1369/firefox/firefox.exe"
-                browser = p.firefox.launch() # await will actually wait for the async load of the website complete to lauch the browser
+                browser = p.firefox.launch(executable_path= "C:/Users/Usuario/AppData/Local/ms-playwright/firefox-1369/firefox/firefox.exe") # await will actually wait for the async load of the website complete to lauch the browser
                 #context = browser.new_context()
                 page = browser.new_page() # page will be a new tab
                 page.goto(url)
@@ -395,9 +395,12 @@ def clean_html(box_score):
     with open(box_score, 'r', encoding="utf-8", errors='ignore') as f:
         html = f.read()
     
+    
     soup = BeautifulSoup(html, 'html.parser')
     [f.decompose() for f in soup.select('tr.over_header')]
     [f.decompose() for f in soup.select('tr.thead')]
+
+    print('Box score readed and parsed to soup object')
    
 
     return soup
@@ -414,11 +417,18 @@ def get_score_line(soup):
         score_row: Dataframe with the score line of the game with total points.  """
 
     score_row = pd.read_html(str(soup), attrs={'id': 'line_score'})[0] # grab the first table, thats actually the table we want
-    # we get to change name of first column and last column (total and teams names) because colunns dinamically change in between
-    score_row.columns.values[0] = 'Team' # first column with the teams name
-    score_row.columns.values[-1] = 'Total' # switch name of T for Total
-    score_row = score_row[['Team', 'Total']] # we get only the important values for us, and ignore the partial scores.
-
+    try:
+  
+        score_row.columns.values[0] = 'Team' # first column with the teams name
+        score_row.columns.values[-1] = 'Total' # switch name of T for Total
+        score_row = score_row[['Team', 'Total']] # we get only the important values for us, and ignore the partial scores.
+    # if we get a key error, it means that "None of [Index(['Team', 'Total'], dtype='object')] are in the [columns]" so we need to change the name of the columns
+    except KeyError:
+        print('entering the except block')
+        #renaming the columns, 0 is the first column and we renaming to team, 'T' is the last column and we rename to 'Total'
+        score_row.rename(columns={0: 'Team', 'T': 'Total'}, inplace=True)
+        score_row = score_row[['Team', 'Total']] # we get only the important values for us, and ignore the partial scores.
+        print('Score line extracted under exception error')
     return score_row
 
 #Now, we gonna create a function to grab the basic and advanced stats by team, in a list of the 2 teams that are playing each other
@@ -438,6 +448,7 @@ def get_stats(soup, team, stat):
     df = pd.read_html(str(soup), attrs={'id':f'box-{team}-game-{stat}'}, index_col=0)[0] # indexcol will be the players column
     
     df = df.apply(pd.to_numeric, errors='coerce')
+    print('stats readed')
     return df
 
 
@@ -455,6 +466,7 @@ def get_game_season(soup):
         string: string with the season of the game.  """
     id = soup.select('#bottom_nav_container')[0]
     string= id.find_all('u')[3] # this u tag has the exact season, so we use regex to extract it
+    print('Season readed')
     return re.findall(r'\d{4}-\d{2}', str(string))[0]
 
 
@@ -601,7 +613,7 @@ if games:
     df_games.to_sql('nba_games', con=engine, if_exists='append', index=False)
     #saving games new ids into a file
     pickle.dump(games_ids, open(os.path.join('Web Scraping', 'games_ids.pkl'), 'wb'))
-    print('new games added!')
+    print(f'new {len(df_games)} games added!')
 else:
     print('no new games added!')
 
