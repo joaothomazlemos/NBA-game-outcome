@@ -614,8 +614,9 @@ if games:
     #trating df_games to have the same columns as df_allgames
     df_games = df_games[df_allgames.columns]
 
-    
 
+    
+    
     # saving to database
     df_games.to_sql('nba_games', con=engine, if_exists='append', index=False)
     #saving games new ids into a file
