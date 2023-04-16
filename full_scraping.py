@@ -466,7 +466,7 @@ def get_game_season(soup):
         string: string with the season of the game.  """
     id = soup.select('#bottom_nav_container')[0]
     string= id.find_all('u')[3] # this u tag has the exact season, so we use regex to extract it
-    print('Season readed')
+
     return re.findall(r'\d{4}-\d{2}', str(string))[0]
 
 
