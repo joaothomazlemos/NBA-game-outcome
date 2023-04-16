@@ -597,13 +597,28 @@ for box_score in tqdm(games_scores): # tqm to track progress.
         print(f'Corrupted box: {game_file_name}')
         continue
 
-from sqlalchemy import create_engine, text
-   
+from sqlalchemy import create_engine, text, inspect
+
+
+
 
 nba_games_db_path = os.path.join('Web Scraping', 'nba_games.db')
 # creating a database
 engine = sqlalchemy.create_engine('sqlite:///' + nba_games_db_path, echo=False, pool_pre_ping=True)
 print('engine created!')
+
+# separating this code block to run in python interactive mode
+
+#%%
+
+inspector = inspect(engine)
+columns = inspector.get_columns('nba_games')
+for column in columns:
+    if column['name'] == 'mp':
+        print('Column already exists')
+print('inpector finished!')
+#%%
+
 #reading the database to a dataframe
 query = 'SELECT * FROM nba_games'
 df_allgames = pd.read_sql(sql=text(query), con=engine.connect())
@@ -717,3 +732,5 @@ print('Last game date: {}'.format(df['date'].iloc[-1]))
 print('Dataframe saved to pickle file, our production dataframe is ready to be used to generate new predictions!')
 
 
+
+# %%
