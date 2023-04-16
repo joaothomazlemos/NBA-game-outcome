@@ -627,9 +627,11 @@ print('shape of df_allgames: ', df_allgames.shape)
 # saving our parsed games in a dataframe 
 if games: 
     df_games = pd.concat(games, axis=0, ignore_index=True) # stack rows of games, assuming all dfs have the same columns
+    #dropping duplicated columns from df_games
+    df_games = df_games.loc[:,~df_games.columns.duplicated()] #type: ignore
 
     df_games = df_games[df_allgames.columns]
-    print('shape of df_games: ', df_games.shape)
+    
     #trating df_games to have the same columns as df_allgames
 
 
