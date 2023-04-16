@@ -622,10 +622,12 @@ print('inpector finished!')
 #reading the database to a dataframe
 query = 'SELECT * FROM nba_games'
 df_allgames = pd.read_sql(sql=text(query), con=engine.connect())
+print('shape of df_allgames: ', df_allgames.shape)
 
 # saving our parsed games in a dataframe 
 if games: 
     df_games = pd.concat(games, axis=0, ignore_index=True) # stack rows of games, assuming all dfs have the same columns
+    print('shape of df_games: ', df_games.shape)
     #trating df_games to have the same columns as df_allgames
     df_games = df_games[df_allgames.columns]
 
