@@ -145,110 +145,199 @@
 
             </h3>
             <form action="{{ url_for('predict') }}" method="post">
-              <div class="form-group">
-                
-                <label for="home-team">Home Team:</label>
-                <input type="text" class="form-control" id="home-team" name="home_team" placeholder="Enter Home Team" required>
-              </div>
-              <div class="form-group">
-                <label for="away-team">Away Team:</label>
-                <input type="text" class="form-control" id="away-team" name="away_team" placeholder="Enter Away Team" required>
-              </div>
-              <button type="submit" class="btn btn-primary">Predict</button>
-            </form>
+                <div class="form-group">
+                  <label for="home-team">Home Team:</label>
+                  <input type="text" class="form-control" id="home-team" name="home_team" placeholder="Enter Home Team" required>
+                </div>
+                <div class="form-group">
+                  <label for="away-team">Away Team:</label>
+                  <input type="text" class="form-control" id="away-team" name="away_team" placeholder="Enter Away Team" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Predict</button>
+              </form>
+              
             <div class="prediction-text">{{ prediction_text }}</div>
           </div>
+          
         <ul style="list-style-type:none; display:flex; flex-wrap: wrap; gap: 20px;">
+
           <li>        <img src="https://cdn.nba.com/logos/nba/1610612737/primary/L/logo.svg" alt="Atlanta Hawks logo" />
+            <button onclick="document.getElementById('home-team').value = 'ATL';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'ATL';">Away</button>
             <span>ATL</span>
             <span>Atlanta Hawks</span></li>
+
           <li> <img src="https://cdn.nba.com/logos/nba/1610612738/primary/L/logo.svg" alt="Boston Celtics logo" />
+            <button onclick="document.getElementById('home-team').value = 'BOS';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'BOS';">Away</button>
             <span>BOS</span>
             <span>Boston Celtics</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612751/primary/L/logo.svg" alt="Brooklyn Nets logo" />
-            <span>BKN</span>
+                <button onclick="document.getElementById('home-team').value = 'BKN';">Home</button>
+                <button onclick="document.getElementById('away-team').value = 'BKN';">Away</button>            
+                <span>BKN</span>
             <span>Brooklyn Nets</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612766/primary/L/logo.svg" alt="Charlotte Hornets logo" />
+            <button onclick="document.getElementById('home-team').value = 'CHA';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'CHA';">Away</button>
             <span>CHA</span>
             <span>Charlotte Hornets</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612741/primary/L/logo.svg" alt="Chicago Bulls logo" />
+            <button onclick="document.getElementById('home-team').value = 'CHI';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'CHI';">Away</button>
             <span>CHI</span>
             <span>Chicago Bulls</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612739/primary/L/logo.svg" alt="Cleveland Cavaliers logo" />
+            <button onclick="document.getElementById('home-team').value = 'CLE';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'CLE';">Away</button>
             <span>CLE</span>
             <span>Cleveland Cavaliers</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612742/primary/L/logo.svg" alt="Dallas Mavericks logo" />
+            <button onclick="document.getElementById('home-team').value = 'DAL';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'DAL';">Away</button>
             <span>DAL</span>
             <span>Dallas Mavericks</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612743/primary/L/logo.svg" alt="Denver Nuggets logo" />
+            <button onclick="document.getElementById('home-team').value = 'DEN';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'DEN';">Away</button>
             <span>DEN</span>
             <span>Denver Nuggets</span></li>
             
             <li> <img src="https://cdn.nba.com/logos/nba/1610612765/primary/L/logo.svg" alt="Detroit Pistons logo" />
+            <button onclick="document.getElementById('home-team').value = 'DET';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'DET';">Away</button>
             <span>DET</span>
             <span>Detroit Pistons</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612744/primary/L/logo.svg" alt="Golden State Warriors logo" />
+            <button onclick="document.getElementById('home-team').value = 'GSW';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'GSW';">Away</button>
             <span>GSW</span>
             <span>Golden State Warriors</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612745/primary/L/logo.svg" alt="Houston Rockets logo" />
+            <button onclick="document.getElementById('home-team').value = 'HOU';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'HOU';">Away</button>
             <span>HOU</span>
             <span>Houston Rockets</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612754/primary/L/logo.svg" alt="Indiana Pacers logo" />
+            <button onclick="document.getElementById('home-team').value = 'IND';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'IND';">Away</button>
             <span>IND</span>
             <span>Indiana Pacers</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612746/primary/L/logo.svg" alt="Los Angeles Clippers logo" />
+            <button onclick="document.getElementById('home-team').value = 'LAC';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'LAC';">Away</button>
             <span>LAC</span>
             <span>Los Angeles Clippers</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg" alt="Los Angeles Lakers logo" />
+            <button onclick="document.getElementById('home-team').value = 'LAL';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'LAL';">Away</button>
             <span>LAL</span>
             <span>Los Angeles Lakers</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612763/primary/L/logo.svg" alt="Memphis Grizzlies logo" />
+            <button onclick="document.getElementById('home-team').value = 'MEM';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'MEM';">Away</button>
             <span>MEM</span>
             <span>Memphis Grizzlies</span></li>
             
             <li> <img src="https://cdn.nba.com/logos/nba/1610612748/primary/L/logo.svg" alt="Miami Heat logo" />
+            <button onclick="document.getElementById('home-team').value = 'MIA';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'MIA';">Away</button>
             <span>MIA</span>
             <span>Miami Heat</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612749/primary/L/logo.svg" alt="Milwaukee Bucks logo" />
+            <button onclick="document.getElementById('home-team').value = 'MIL';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'MIL';">Away</button>
             <span>MIL</span>
             <span>Milwaukee Bucks</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612750/primary/L/logo.svg" alt="Minnesota Timberwolves logo" />
+            <button onclick="document.getElementById('home-team').value = 'MIN';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'MIN';">Away</button>
             <span>MIN</span>
             <span>Minnesota Timberwolves</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612740/primary/L/logo.svg" alt="New Orleans Pelicans logo" />
+            <button onclick="document.getElementById('home-team').value = 'NOP';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'NOP';">Away</button>
             <span>NOP</span>
             <span>New Orleans Pelicans</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612752/primary/L/logo.svg" alt="New York Knicks logo" />
+            <button onclick="document.getElementById('home-team').value = 'NYK';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'NYK';">Away</button>
             <span>NYK</span>
             <span>New York Knicks</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612760/primary/L/logo.svg" alt="Oklahoma City Thunder logo" />
+            <button onclick="document.getElementById('home-team').value = 'OKC';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'OKC';">Away</button>
             <span>OKC</span>
             <span>Oklahoma City Thunder</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612753/primary/L/logo.svg" alt="Orlando Magic logo" />
+            <button onclick="document.getElementById('home-team').value = 'ORL';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'ORL';">Away</button>
             <span>ORL</span>
             <span>Orlando Magic</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612755/primary/L/logo.svg" alt="Philadelphia 76ers logo" />
+            <button onclick="document.getElementById('home-team').value = 'PHI';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'PHI';">Away</button>
             <span>PHI</span>
             <span>Philadelphia 76ers</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612756/primary/L/logo.svg" alt="Phoenix Suns logo" />
+            <button onclick="document.getElementById('home-team').value = 'PHX';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'PHX';">Away</button>
             <span>PHX</span>
             <span>Phoenix Suns</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612757/primary/L/logo.svg" alt="Portland Trail Blazers logo" />
+            <button onclick="document.getElementById('home-team').value = 'POR';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'POR';">Away</button>
             <span>POR</span>
             <span>Portland Trail Blazers</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612758/primary/L/logo.svg" alt="Sacramento Kings logo" />
+            <button onclick="document.getElementById('home-team').value = 'SAC';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'SAC';">Away</button>
             <span>SAC</span>
             <span>Sacramento Kings</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612759/primary/L/logo.svg" alt="San Antonio Spurs logo" />
+            <button onclick="document.getElementById('home-team').value = 'SAS';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'SAS';">Away</button>
             <span>SAS</span>
             <span>San Antonio Spurs</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612761/primary/L/logo.svg" alt="Toronto Raptors logo" />
+            <button onclick="document.getElementById('home-team').value = 'TOR';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'TOR';">Away</button>
             <span>TOR</span>
             <span>Toronto Raptors</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612762/primary/L/logo.svg" alt="Utah Jazz logo" />
+            <button onclick="document.getElementById('home-team').value = 'UTA';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'UTA';">Away</button>
             <span>UTA</span>
             <span>Utah Jazz</span></li>
+
             <li> <img src="https://cdn.nba.com/logos/nba/1610612764/primary/L/logo.svg" alt="Washington Wizards logo" />
+            <button onclick="document.getElementById('home-team').value = 'WAS';">Home</button>
+            <button onclick="document.getElementById('away-team').value = 'WAS';">Away</button>
             <span>WAS</span>
             <span>Washington Wizards</span></li>
             </ul>
