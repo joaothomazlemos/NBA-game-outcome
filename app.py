@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import warnings
 import datetime
+import os
 
 # The input are provided with feature names, as  we did in the training phase. So the warnings are not relevant. We are going to ignore them.
 warnings.filterwarnings('ignore', message='X does not have valid feature names, but StandardScaler was fitted with feature names')
@@ -15,18 +16,18 @@ warnings.filterwarnings('ignore', message='X does not have valid feature names, 
 # create a Flask app
 app = Flask(__name__)
 
-# load the logistic regression model
-model = pickle.load(open('Data Analysis/models_2/RandomForestClassifier_100.pkl', 'rb'))
+# load the logistic regression model dinamically from path
+model = pickle.load(open(os.path.join(os.path.dirname(__file__), 'Data Analysis', 'models_2', 'RandomForestClassifier_100.pkl'), 'rb'))
 
 # load the NBA games dataset from the pickle file
-games = pickle.load(open('production_df.pkl', 'rb'))
+games = pickle.load(open(os.path.join(os.path.dirname(__file__), 'production_df.pkl'), 'rb'))
 games['date'] = pd.to_datetime(games['date'])
 
 # Getting the most recent scraped data from games['date'] column
 last_date = datetime.datetime.strftime(games['date'].max(), "%d-%m-%Y")
 
 # Loadings the best 50 features
-best_features = pd.read_csv('Data Analysis/best_features/PCA_100.csv')
+best_features = pd.read_csv(os.path.join(os.path.dirname(__file__), 'Data Analysis', 'best_features', 'PCA_100.csv'))
 
 # define the information columns. We are going to take out all this information to concatenate the rows of the last n games of the 2 teams
 #although, as the df is already date ordered, we are only using the 'Team' column to search for the last n games of each team. Is the col that we associate with the user input
