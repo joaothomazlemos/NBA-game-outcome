@@ -16,7 +16,7 @@ until model deploy with predictions.
 
 1 - Web Scraping: https://medium.com/@joaothomazlemos/nba-web-scraping-with-python-22c76cfd1d4f
 
-2 - Data manipulation, model building: (Comming soon)
+2 - Data exploration/manipulation, model building: (Comming soon)
 
 3 - Web Application development and deployment on cloud: (Coming soon)
 
