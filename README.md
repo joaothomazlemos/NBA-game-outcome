@@ -14,5 +14,7 @@ until model deploy with predictions.
 Links for medium articles about each step:
 
 1 - Web Scraping: https://medium.com/@joaothomazlemos/nba-web-scraping-with-python-22c76cfd1d4f
+
 2 - Data manipulation, model building: (Comming soon)
+
 3 - Application deployment: (Coming soon)
