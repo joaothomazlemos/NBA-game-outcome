@@ -18,7 +18,7 @@ until model deploy with predictions.
 
 2 - Data manipulation, model building: (Comming soon)
 
-3 - Application development and deployment on cloud: (Coming soon)
+3 - Web Application development and deployment on cloud: (Coming soon)
 
 ### Application
 
