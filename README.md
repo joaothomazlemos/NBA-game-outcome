@@ -18,3 +18,5 @@ Links for medium articles about each step:
 2 - Data manipulation, model building: (Comming soon)
 
 3 - Application deployment: (Coming soon)
+
+Application running at AWS server: http://ec2-18-118-255-33.us-east-2.compute.amazonaws.com:5000/
