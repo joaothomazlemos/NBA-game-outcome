@@ -36,7 +36,7 @@ info_cols = ['date', 'Team', 'opponent_Team', 'season', 'home', 'WIN']
 # define the home page of the web app
 @app.route('/')
 def home():
-    return render_template('home.html', message='Last atualization: ' + str(last_date))
+    return render_template('home.html', message='Lastest games scraped on: ' + str(last_date))
 
 # define the predict API endpoint
 @app.route('/predict', methods=['POST'])
@@ -118,7 +118,7 @@ def predict():
         winner = away_team
 
     # return the prediction with render_template
-    return render_template('home.html',
+    return render_template('home.html', message='Lastest games scraped on: ' + str(last_date),
          prediction_text='You choose to see who will win in the game between {} and {}.\n The predicted winner is {} with certainty of {:.1%}'.format(home_team, away_team,winner, prob))
 
    # return the prediction as a JSON object
