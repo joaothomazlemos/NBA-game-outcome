@@ -16,10 +16,10 @@ until model deploy with predictions.
 
 1 - Web Scraping: https://medium.com/@joaothomazlemos/nba-web-scraping-with-python-22c76cfd1d4f
 
-2 - Data exploration/manipulation, model building: https://medium.com/@joaothomazlemos/nba-games-outcome-project-data-development-3a6913658c5
+2 - Data exploration/manipulation: https://medium.com/@joaothomazlemos/nba-games-outcome-project-data-development-3a6913658c5
 
-3 - Web Application development and deployment on cloud: (Coming soon)
+3 - Model Building: (Coming soon)
 
-### Application
+4 - Web Application development and deployment on cloud: (Coming soon)
 
-Application running at AWS server: http://ec2-18-118-255-33.us-east-2.compute.amazonaws.com:5000/
+
