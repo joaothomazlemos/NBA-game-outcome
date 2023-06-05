@@ -10,6 +10,7 @@ Also, I thought that it would be nice to challenge myself into learning somethin
 
 This work propose a model to predict NBA games outcomes in form of WIN or LOSS, starting since the webscraping step to get data,
 until model deploy with predictions. Below we can get some insight of what performance reference we should beat.
+
 ![image](https://github.com/joaothomazlemos/NBA-game-outcome/assets/62029505/540331f0-d7ed-4e8f-a247-892465fbaf31)
 
 
@@ -28,7 +29,8 @@ until model deploy with predictions. Below we can get some insight of what perfo
 ### Results
 
 
-With everything done, the predictions are coming from a refined Random Forest model, with accuracy up to 82%!
+With everything done, the predictions are coming from a refined Random Forest model, with accuracy up to 82%, and AUC as about 81% as seen in the graphic below.
+
 ![image](https://github.com/joaothomazlemos/NBA-game-outcome/assets/62029505/728954f0-8e39-44e0-b4e6-de971cc01e30)
 
 
