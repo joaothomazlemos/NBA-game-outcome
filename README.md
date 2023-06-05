@@ -9,7 +9,10 @@ Also, I thought that it would be nice to challenge myself into learning somethin
 ### Objective
 
 This work propose a model to predict NBA games outcomes in form of WIN or LOSS, starting since the webscraping step to get data,
-until model deploy with predictions.
+until model deploy with predictions. Below we can get some insight of what performance reference we should beat.
+![image](https://github.com/joaothomazlemos/NBA-game-outcome/assets/62029505/540331f0-d7ed-4e8f-a247-892465fbaf31)
+
+
 
 ### Methods  - Author written articles on Medium
 
@@ -18,8 +21,15 @@ until model deploy with predictions.
 
 2 - Data exploration/manipulation: https://medium.com/@joaothomazlemos/nba-games-outcome-project-data-development-3a6913658c5
 
-3 - Model Building: (Coming soon)
+3 - Model Building: https://medium.com/@joaothomazlemos/nba-games-outcome-project-model-development-a6ee5d6b046b
 
 4 - Web Application development and deployment on cloud: (Coming soon)
+
+### Results
+
+
+With everything done, the predictions are coming from a refined Random Forest model, with accuracy up to 82%!
+![image](https://github.com/joaothomazlemos/NBA-game-outcome/assets/62029505/728954f0-8e39-44e0-b4e6-de971cc01e30)
+
 
 
