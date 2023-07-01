@@ -1,4 +1,5 @@
 # NBA-game-outcome
+![image](https://github.com/joaothomazlemos/NBA-game-outcome/assets/62029505/c8f9d38b-4291-433d-8bae-1086c06adf62)
 
 ### Motivation
 
