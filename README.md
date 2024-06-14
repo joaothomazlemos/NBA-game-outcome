@@ -28,7 +28,7 @@ until the model deployment with predictions. Below we'll be able to give you som
 
 3 - Model Building: https://medium.com/@joaothomazlemos/nba-games-outcome-project-model-development-a6ee5d6b046b
 
-4 - Web Application development and deployment on the cloud: (Coming soon)
+4 - Web Application development and deployment on the cloud.
 
 ### Results
 
